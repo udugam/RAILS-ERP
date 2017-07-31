@@ -1,0 +1,24 @@
+{
+  "name": "PureKitchens",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-runtime": "^6.20.0",
+    "classnames": "^2.2.5",
+    "meteor-node-stubs": "~0.2.4",
+    "muicss": "^0.9.13",
+    "react": "^15.4.2",
+    "react-addons-pure-render-mixin": "^15.4.2",
+    "react-bootstrap": "^0.30.10",
+    "react-dom": "^15.4.2",
+    "react-komposer": "^2.0.0",
+    "react-router": "^3.0.0",
+    "react-router-dom": "^4.1.2",
+    "react-stepzilla": "^4.3.4",
+    "webpack": "^1.14.0"
+  }
+}
