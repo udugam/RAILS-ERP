@@ -8,6 +8,8 @@ import Drawers from '../imports/api/Drawers';
 import Hardware from '../imports/api/Hardware';
 import CrownMoldings from '../imports/api/CrownMoldings';
 import Operations from '../imports/api/Operations';
+import Accessories from '../imports/api/Accessories';
+import MillworkItems from '../imports/api/MillworkItems';
 import '../imports/server/accounts';
 
 

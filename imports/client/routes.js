@@ -14,18 +14,20 @@ import NewColor from './NewColor';
 import NewDrawer from './NewDrawer';
 import NewHardware from './NewHardware';
 import NewCrownMolding from './NewCrownMolding';
+import NewAccessory from './NewAccessory';
+import NewMillworkItem from './NewMillworkItem';
 import ConfigureOps from './ConfigureOps';
 import MyQuotes from './MyQuotes';
 import QuotePage from './QuotePage';
 import MainLayout from './layouts/MainLayout';
-
+import NewProject from './NewProject';
 
 Meteor.startup(() => {
   render(
     <Router history={browserHistory}>
       <Route path="/" component={MainLayout}>
         <IndexRoute/>
-        <Route path="/newQuote" component={NewQuote}/>
+        <Route path="/newProject" component={NewProject}/>
         <Route path="/myQuotes" component={MyQuotes}/>
         <Route path="/configureOps" component={ConfigureOps}/>
         <Route path="/addMaterials" component={NewMaterial}/>
@@ -34,6 +36,8 @@ Meteor.startup(() => {
         <Route path="/addDoorStyle" component={NewDoorStyle}/>
         <Route path="/addCrownMolding" component={NewCrownMolding}/>
         <Route path="/addColor" component={NewColor}/>
+        <Route path="/addAccessory" component={NewAccessory}/>
+        <Route path="/addMillworkItem" component={NewMillworkItem}/>
         <Route path="/:id" component={QuotePage}/>
       </Route>
     </Router>,

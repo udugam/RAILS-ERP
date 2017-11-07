@@ -36,30 +36,42 @@ if (Meteor.isServer) {
     });
 
   Meteor.methods( {
-    insertNewQuote(jobStatus,jobName,jobAddress,linFootage,height,constructionMaterial,doorSpecies,doorStyle,color,drawerModel,drawerQty,hardware,hardwareQty,crownMolding,lightValance,molding,jobValue) {
+    insertNewQuote(projectStatus,projectName,projectAddress,projectRooms,projectValue) {
       if(Meteor.userId()) {
         Quotes.insert({
-          jobOwner: Meteor.userId(),
-          jobStatus: jobStatus,
-          jobName: jobName,
-          jobAddress: jobAddress,
-          linFootage: linFootage,
-          height: height,
-          constructionMaterial: constructionMaterial,
-          doorSpecies: doorSpecies,
-          doorStyle: doorStyle,
-          color: color,
-          drawerModel: drawerModel,
-          drawerQty: drawerQty,
-          hardware: hardware,
-          hardwareQty: hardwareQty,
-          crownMolding: crownMolding,
-          lightValance: lightValance,
-          molding: molding,
-          jobValue: jobValue,
+          projectOwner: Meteor.userId(),
+          projectStatus: projectStatus,
+          projectName: projectName,
+          projectAddress: projectAddress,
+          projectRooms: projectRooms,
+          projectValue: projectValue,
         });
       }
-    }
+    },
+
+    updateQuote(roomToUpdate, updatedRoom) { //Bring in quote._id and find the quote, iterate through each room, assigning a key, and update that room using the key
+      Quotes.update( roomToUpdate, {
+        $set: {
+                roomNum: updatedRoom.roomNum,
+                description: updatedRoom.description,
+                linFootage: updatedRoom.linFootage,
+                height: updatedRoom.height,
+                constructionMaterial: updatedRoom.constructionMaterial,
+                quote: updatedRoom.quote,
+                doorSpecies: updatedRoom.doorSpecies,
+                doorStyle: updatedRoom.doorStyle,
+                color: updatedRoom.color,
+                drawerQty: updatedRoom.drawerQty,
+                drawerModel: updatedRoom.drawerModel,
+                hardware: updatedRoom.hardware,
+                hardwareQty: updatedRoom.hardwareQty,
+                crownMolding: updatedRoom.crownMolding,
+                quoteAccessories: updatedRoom.quoteAccessories,
+                quoteMillworkItems: updatedRoom.quoteMillworkItems,
+                cost: updatedRoom.cost,
+              }
+          });
+      }
   });
 }
 

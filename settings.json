@@ -1,5 +1,11 @@
+
 {
-  "admins" : [
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL" : "mongodb://dbuser:dbpassword@ds129043.mlab.com:29043/purekitchensdb"
+    }
+  },
+  "admin": [
     "ryan.udugam@gmail.com"
   ]
 }

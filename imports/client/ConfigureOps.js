@@ -1,7 +1,7 @@
 
   import React, {Component} from 'react';
   import { createContainer } from 'meteor/react-meteor-data';
-
+  import {PageHeader} from 'React-Bootstrap';
   import Operations from '../api/Operations';
 
 
@@ -69,7 +69,7 @@
 
       return (
         <div>
-          <h2>Create New Operation</h2>
+          <PageHeader>Create New Operation</PageHeader>
           <div>
             { /*Form Begins*/ }
             <form className='form-horizontal' onSubmit={this.createOperation.bind(this)}>

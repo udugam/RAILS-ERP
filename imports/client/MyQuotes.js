@@ -2,31 +2,36 @@ import React, {Component} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import Quotes from '../api/Quotes';
 import {Link} from 'react-router';
+import {PageHeader} from 'React-Bootstrap';
 
 class MyQuotes extends Component {
 
   render() {
     return(
-       /*Display Quotes Created by user*/
-        <div className='table-responsive'>
-          <table className='table'>
-            <tbody>
-              <tr>
-                <th>Project Name</th>
-                <th>Value</th>
-                <th>Status</th>
-              </tr>
-              {this.props.quotes.map((storedQuote) => {
-                  return (
-                    <tr key={storedQuote._id}>
-                      <td><Link to={storedQuote._id}>{storedQuote.jobName}</Link></td>
-                      <td>{storedQuote.jobValue}</td>
-                      <td>{storedQuote.jobStatus}</td>
-                    </tr>
-                  )
-              })}
-            </tbody>
-          </table>
+        <div>
+          <PageHeader>My Quotes</PageHeader>
+          <div className='table-responsive'>
+            <table className='table'>
+              <tbody>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Value</th>
+                  <th>Status</th>
+                </tr>
+                {this.props.quotes.map((storedQuote) => {
+                    return (
+
+                        <tr key={storedQuote._id}>
+                          <td><Link to={storedQuote._id}>{storedQuote.projectName}</Link></td>
+                          <td>{storedQuote.projectValue}</td>
+                          <td>{storedQuote.projectStatus}</td>
+                        </tr>
+
+                    )
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
     )
   }
@@ -39,6 +44,6 @@ export default createContainer(() => {
   }
 
   return {
-    quotes: Quotes.find({jobOwner: Meteor.userId()}).fetch(),
+    quotes: Quotes.find({projectOwner: Meteor.userId()}).fetch(),
   }
 }, MyQuotes);

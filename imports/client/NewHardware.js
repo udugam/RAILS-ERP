@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import Hardware from '../api/Hardware';
+import {PageHeader, Button, Panel} from 'React-Bootstrap';
 
 class NewHardware extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
 
   addHardware(event) {
     event.preventDefault();
@@ -13,13 +21,7 @@ class NewHardware extends Component {
     const hardwareCost = this.refs.cost.value.trim();
 
     if (hardwareName != '' && hardwareCost != '') {
-      Hardware.insert({
-        name: hardwareName,
-        finish: hardwareFinish,
-        size: hardwareSize,
-        supplier: hardwareSupplier,
-        cost: hardwareCost,
-      });
+      Meteor.call('insertNewHardware',hardwareName, hardwareFinish, hardwareSize, hardwareSupplier, hardwareCost);
     }
   }
 
@@ -28,57 +30,63 @@ class NewHardware extends Component {
     return (
       <div>
         <div>
-          <form className='form-horizontal' onSubmit={this.addHardware.bind(this)}>
-            {/*1. Input Hardware Name */}
-            <div className='form-group'>
-              <label className='col-sm-2 control-label'>Name</label>
-              <div className='col-sm-4'>
-                <input type='text' className='form-control' ref='name'/>
+          <PageHeader>Hardware Database</PageHeader>
+          <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
+            Add New Hardware
+          </Button>
+          <Panel collapsible expanded={this.state.open}>
+            <form className='form-horizontal' onSubmit={this.addHardware.bind(this)}>
+              {/*1. Input Hardware Name */}
+              <div className='form-group'>
+                <label className='col-sm-2 control-label'>Name</label>
+                <div className='col-sm-4'>
+                  <input type='text' className='form-control' ref='name'/>
+                </div>
               </div>
-            </div>
 
-            {/*2. Input Hardware Finish */}
-            <div className='form-group'>
-              <label className='col-sm-2 control-label'>Finish</label>
-              <div className='col-sm-4'>
-                <select className='form-control' ref='finish'>
-                  <option value='CH'> Chrome </option>
-                  <option value='SS'> Stainless Steel </option>
-                  <option value='BN'> Brushed Nickel </option>
-                  <option value='AN'> Antique Nickel </option>
-                  <option value='ORB'> Oil-Rubbed Bronze </option>
-                  <option value='BR'> Brass </option>
-                </select>
+              {/*2. Input Hardware Finish */}
+              <div className='form-group'>
+                <label className='col-sm-2 control-label'>Finish</label>
+                <div className='col-sm-4'>
+                  <select className='form-control' ref='finish'>
+                    <option value='CH'> Chrome </option>
+                    <option value='SS'> Stainless Steel </option>
+                    <option value='BN'> Brushed Nickel </option>
+                    <option value='AN'> Antique Nickel </option>
+                    <option value='ORB'> Oil-Rubbed Bronze </option>
+                    <option value='BR'> Brass </option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            {/*3. Input Hardware Size (Center to Center) */}
-            <div className='form-group'>
-              <label className='col-sm-2 control-label'>Center to Center (mm)</label>
-              <div className='col-sm-4'>
-                <input type='number' className='form-control' ref='size'/>
+              {/*3. Input Hardware Size (Center to Center) */}
+              <div className='form-group'>
+                <label className='col-sm-2 control-label'>Center to Center (mm)</label>
+                <div className='col-sm-4'>
+                  <input type='number' className='form-control' ref='size'/>
+                </div>
               </div>
-            </div>
 
-            {/*4. Input Hardware Supplier */}
-            <div className='form-group'>
-              <label className='col-sm-2 control-label'>Supplier</label>
-              <div className='col-sm-4'>
-                <input type='text' className='form-control' ref='supplier'/>
+              {/*4. Input Hardware Supplier */}
+              <div className='form-group'>
+                <label className='col-sm-2 control-label'>Supplier</label>
+                <div className='col-sm-4'>
+                  <input type='text' className='form-control' ref='supplier'/>
+                </div>
               </div>
-            </div>
 
-            {/*5. Input Hardware Cost */}
-            <div className='form-group'>
-              <label className='col-sm-2 control-label'>Cost</label>
-              <div className='col-sm-4'>
-                <input type='number' className='form-control' ref='cost' step='0.01'/>
+              {/*5. Input Hardware Cost */}
+              <div className='form-group'>
+                <label className='col-sm-2 control-label'>Cost</label>
+                <div className='col-sm-4'>
+                  <input type='number' className='form-control' ref='cost' step='0.01'/>
+                </div>
               </div>
-            </div>
 
-            <button className='btn btn-primary' type='submit'>Add Hardware</button>
+              <button className='btn btn-primary' type='submit'>Add Hardware to Database</button>
 
-          </form>
+            </form>
+          </Panel>
         </div>
 
         {/*Display Material List*/}
