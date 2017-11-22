@@ -55,9 +55,9 @@ export default class EditRoom extends Component {
   updateThenClose(event) {
     const updatedRoom = this.state;
     const rooms = this.props.quote.projectRooms;
-    const roomNum = this.props.roomId;
-    const roomToUpdate = rooms[roomNum];
-    Meteor.call('updateQuote', roomToUpdate, updatedRoom);
+    const quoteID = this.props.quote._id;
+    const roomNum = (this.props.roomId).toString();
+    Meteor.call('updateRoom', roomNum, updatedRoom, quoteID);
   }
 
 
