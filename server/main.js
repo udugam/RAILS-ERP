@@ -10,6 +10,7 @@ import CrownMoldings from '../imports/api/CrownMoldings';
 import Operations from '../imports/api/Operations';
 import Accessories from '../imports/api/Accessories';
 import MillworkItems from '../imports/api/MillworkItems';
+import Cabinets from '../imports/api/Cabinets';
 import '../imports/server/accounts';
 
 

@@ -17,6 +17,7 @@ class DatabaseLinks extends Component {
                 <li><Link to='/addDrawer'>Drawers</Link></li>
                 <li><Link to='/addAccessory'>Accessories</Link></li>
                 <li><Link to='/addMillworkItem'>Millwork Items</Link></li>
+                <li><Link to='/cabinetDatabase'>Cabinets</Link></li>
                 <li><Link to='/configureOps'>Operation Settings</Link></li>
               </ul>
     } else {

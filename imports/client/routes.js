@@ -21,6 +21,7 @@ import MyQuotes from './MyQuotes';
 import QuotePage from './QuotePage';
 import MainLayout from './layouts/MainLayout';
 import NewProject from './NewProject';
+import CabinetDatabase from './CabinetDatabase';
 
 Meteor.startup(() => {
   render(
@@ -38,6 +39,7 @@ Meteor.startup(() => {
         <Route path="/addColor" component={NewColor}/>
         <Route path="/addAccessory" component={NewAccessory}/>
         <Route path="/addMillworkItem" component={NewMillworkItem}/>
+        <Route path="/cabinetDatabase" component={CabinetDatabase}/>
         <Route path="/:id" component={QuotePage}/>
       </Route>
     </Router>,

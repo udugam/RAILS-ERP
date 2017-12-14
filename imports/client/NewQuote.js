@@ -59,7 +59,6 @@ if (Meteor.userId()) {
        [name]: value,
      }, () => this.setCostEstimate(),this.props.callbackFromProject(this.state));
      /*The above function sends the updated information back to the Project component, after setState is done*/
-
     }
 
     setCostEstimate() {
