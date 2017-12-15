@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Cabinets from '../api/Cabinets';
 import CabinetPartsList from './CabinetPartsList';
-import NewCabinetPart from './NewCabinetPart';
+import AddCabinetPart from './AddCabinetPart';
 
 import {
     FormGroup,
@@ -88,7 +88,7 @@ export default class AddNewCabinet extends Component {
 
                     {/*Add Cabinet Parts*/}
                     <ControlLabel>Add Cabinet Parts</ControlLabel>
-                    <NewCabinetPart addPartCallback={this.addPart} />
+                    <AddCabinetPart addPartCallback={this.addPart} />
 
                     {/*Display Added Cabinet Parts*/}
                     <CabinetPartsList parts={this.state.constructionParts} />

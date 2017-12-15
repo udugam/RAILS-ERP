@@ -11,7 +11,7 @@ import {
     Checkbox,
 } from 'React-Bootstrap';
 
-export default class NewCabinetPart extends Component {
+export default class AddCabinetPart extends Component {
     constructor(props) {
         super(props);
         this.state = {

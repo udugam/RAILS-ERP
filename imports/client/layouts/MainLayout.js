@@ -26,6 +26,7 @@ const MainLayout = (props) =>
       <Nav>
         <NavItem><Link to='/newProject'>Create New Project</Link></NavItem>
         <NavItem><Link to='/myQuotes'>My Quotes</Link></NavItem>
+        <NavItem><Link to='/cutListGenerator'>Cut-List Generator</Link></NavItem>
         <NavDropdown eventKey={3} title="Database" id="basic-nav-dropdown">
           <DatabaseLinks></DatabaseLinks>
         </NavDropdown>
