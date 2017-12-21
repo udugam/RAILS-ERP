@@ -53,7 +53,7 @@ class CutListGenerator extends Component {
         </Table>
 
         {/*Generate Cutlist CSV */}
-            <GenerateCutListCSV />
+            <GenerateCutListCSV cutListCabinets={this.state.cabinets} materials={this.props.materials} />
       </div>
     )
   }

@@ -16,11 +16,9 @@ export default class AddCabinetPart extends Component {
         super(props);
         this.state = {
             partName: "",
-            partLengthEquation: "",
             partLength: 0,
-            partWidthEquation: "",
             partWidth: 0,
-            partThickness: "t",
+            partThickness: 0,
             partCustomThickness: false,
             partProgramPath: "",
         }
@@ -56,35 +54,6 @@ export default class AddCabinetPart extends Component {
                                 </FormControl>
                             </FormGroup>
                         </Col>
-                        <Col xs={6} md={3}>
-                            {/*Input Length Equation*/}
-                            <FormGroup>
-                                <ControlLabel>Length Equation</ControlLabel>
-                                <FormControl type="text" name="partLength" onChange={this.handleInputChange} />
-                            </FormGroup>
-                        </Col>
-                        <Col xs={6} md={3}>
-                            {/*Input Width Equation*/}
-                            <FormGroup>
-                                <ControlLabel>Width Equation</ControlLabel>
-                                <FormControl type="text" name="partWidth" onChange={this.handleInputChange} />
-                            </FormGroup>
-                        </Col>
-                        <Col xs={6} md={3}>
-                            {/*Input Thickness*/}
-                            <FormGroup>
-                                <ControlLabel>Thickness</ControlLabel>
-                                {this.state.partCustomThickness? (
-                                    <FormControl type="number" name="partThickness" onChange={this.handleInputChange} />
-                                ) : (
-                                    <Checkbox checked disabled>
-                                        Same as Cabinet Material
-                                    </Checkbox> 
-                                )}
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
                         <Col xs={6} md={4}>
                             {/*Input Program Path*/}
                             <FormGroup>
