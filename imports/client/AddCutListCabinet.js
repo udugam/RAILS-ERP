@@ -15,6 +15,7 @@ export default class AddCutListCabinet extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            cabNum: "",
             cabCode: "",
             cabWidth: 0,
             cabHeight: 0,
@@ -39,6 +40,13 @@ export default class AddCutListCabinet extends Component {
             <form>
                 <Grid>
                     <Row>
+                        <Col xs={6} md={3}>
+                            {/*Input Cabinet Number*/}
+                            <FormGroup>
+                                <ControlLabel>Cabinet Number</ControlLabel>
+                                <FormControl type="text" name="cabNum" onChange={this.handleInputChange} />
+                            </FormGroup>
+                        </Col>
                         <Col xs={6} md={3}>
                             {/*Select Cabinet Code */}
                             <FormGroup>

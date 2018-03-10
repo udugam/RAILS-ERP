@@ -21,6 +21,7 @@ export default class GenerateCutListCSV extends Component {
     populatePartList() {
         this.props.cutListCabinets.map((listedCabinet) => {
             let cabinet = Cabinets.findOne({code:listedCabinet.cabCode});
+            let cabinetParts = cabinet.constructionParts;
             let material = Materials.findOne({name:listedCabinet.cabMaterial});
             cabinet.constructionParts.map((listedPart) => {
                 switch(listedPart.partName) {
@@ -28,31 +29,67 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabDepth-listedPart.partThickness;
-                        this.updateCSV(listedPart);
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'rGable':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabDepth-listedPart.partThickness;
-                        this.updateCSV(listedPart);
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'stretcher':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
                         listedPart.partWidth = 100;
-                        this.updateCSV(listedPart);
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'bottom':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
                         listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
-                        this.updateCSV(listedPart);
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'top':
+                        listedPart.partThickness = material.thickness;
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
+                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'back':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabWidth;
-                        this.updateCSV(listedPart);
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'shelf':
+                        listedPart.partThickness = material.thickness;
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-5;
+                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'fixedShelf':
+                        listedPart.partThickness = material.thickness;
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
+                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'drwBoxSide':
+                        listedPart.partThickness = material.thickness;
+                        listedPart.partLength = listedCabinet.cabDepth;
+                        listedPart.partWidth = listedCabinet.cabHeight;
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'drwBoxFace':
+                        listedPart.partThickness = material.thickness;
+                        listedPart.partLength = listedCabinet.cabWidth-(4*material.thickness)-26.4;
+                        listedPart.partWidth = listedCabinet.cabHeight;
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'drwBoxBottom':
+                        listedPart.partThickness = material.thickness;
+                        listedPart.partLength = listedCabinet.cabWidth-(4*material.thickness)-26.4;
+                        listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness);
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     default:
                         console.log("Part Does Not Exist"); 
@@ -61,18 +98,18 @@ export default class GenerateCutListCSV extends Component {
         })
     }
 
-    updateCSV(listedPart) {
+    updateCSV(listedPart,cabNum) {
         let listedCSVPart = [
-            'Piece',
+            cabNum+"-"+listedPart.partName,
             '',
             '',
-            '1',
+            listedPart.partQty,
             '0',
             listedPart.partLength,
             listedPart.partWidth,
             listedPart.partThickness,
             '',
-            '1',
+            '0',
             listedPart.partProgramPath,
         ]
 

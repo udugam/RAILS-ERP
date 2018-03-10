@@ -60,14 +60,9 @@ class NewMaterial extends Component {
 
                 {/*3. Select Thickness*/}
                 <div className='form-group'>
-                  <label className='col-sm-2 control-label'>Thickness</label>
+                  <label className='col-sm-2 control-label'>Thickness (mm)</label>
                   <div className='col-sm-4'>
-                    <select className='form-control' ref='materialThickness'>
-                      <option value='25.4'> 25.4mm </option>
-                      <option value='19'> 19mm </option>
-                      <option value='18'> 18mm </option>
-                      <option value='16'> 16mm </option>
-                    </select>
+                    <input type='number' className='form-control' ref='materialThickness' step='0.1'/>
                   </div>
                 </div>
 
@@ -75,7 +70,7 @@ class NewMaterial extends Component {
                 <div className='form-group'>
                   <div className='row'>
                     <div className='col-sm-6'>
-                      <label className='col-sm-2 control-label'>Sheet Size</label>
+                      <label className='col-sm-2 control-label'>Sheet Size (mm)</label>
                       <div className='col-sm-3'>
                         <input type='number' className='form-control' ref='sheetW' placeholder='Width'/>
                       </div>

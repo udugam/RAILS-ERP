@@ -19,6 +19,7 @@ export default class AddCabinetPart extends Component {
             partLength: 0,
             partWidth: 0,
             partThickness: 0,
+            partQty: 1,
             partCustomThickness: false,
             partProgramPath: "",
         }
@@ -49,8 +50,14 @@ export default class AddCabinetPart extends Component {
                                     <option value="lGable">Left Gable</option>
                                     <option value="rGable">Right Gable</option>
                                     <option value="bottom">Bottom</option>
+                                    <option value="top">Top</option>
                                     <option value="stretcher">Stretcher</option>
                                     <option value="back">Back</option>
+                                    <option value="shelf">Shelf</option>
+                                    <option value="fixedShelf">Fixed Shelf</option>
+                                    <option value="drwBoxSide">Drawer Box Side</option>
+                                    <option value="drwBoxFace">Drawer Box Front/Back</option>
+                                    <option value="drwBoxBottom">Drawer Box Bottom</option>
                                 </FormControl>
                             </FormGroup>
                         </Col>
@@ -59,6 +66,13 @@ export default class AddCabinetPart extends Component {
                             <FormGroup>
                                 <ControlLabel>Program Path for Part</ControlLabel>
                                 <FormControl type="text" name="partProgramPath" onChange={this.handleInputChange} />
+                            </FormGroup>
+                        </Col>
+                        <Col xs={6} md={4}>
+                            {/*Input Quantity*/}
+                            <FormGroup>
+                                <ControlLabel>Quantity</ControlLabel>
+                                <FormControl type="number" name="partQty" placeholder="1" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                     </Row>   

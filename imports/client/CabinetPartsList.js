@@ -19,6 +19,7 @@ export default class CabinetPartsList extends Component {
                             <tr key={part.partNum}>
                                 <td>{part.partName}</td>
                                 <td>{part.partProgramPath}</td>
+                                <td>{part.partQty}</td>
                             </tr>
                         )
                     })}
