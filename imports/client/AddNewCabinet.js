@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Cabinets from '../api/Cabinets';
 import CabinetPartsList from './CabinetPartsList';
 import AddCabinetPart from './AddCabinetPart';
+import AddDrawers from './AddDrawers'
 
 import {
     FormGroup,
@@ -10,7 +11,8 @@ import {
     Grid,
     Row,
     Col,
-    Button
+    Button,
+    Checkbox
 } from 'React-Bootstrap';
 
 export default class AddNewCabinet extends Component {
@@ -19,6 +21,7 @@ export default class AddNewCabinet extends Component {
         this.state = {
             code: "",
             description: "",
+            drawerCheckbox: false,
             constructionParts: [],
             hardwareParts: [],
             cabWidth: 0,
@@ -26,6 +29,7 @@ export default class AddNewCabinet extends Component {
             cabHeight: 0,
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
       }
 
      //The State of the new cabinet will live here until it is added to the database
@@ -35,9 +39,18 @@ export default class AddNewCabinet extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-   
+
         this.setState({
           [name]: value,
+        });
+    }
+
+    handleCheckboxChange(event) {
+        const target = event.target
+        const checked = target.checked
+        const name = target.name
+        this.setState({
+            [name]: checked,
         });
     }
 
@@ -84,11 +97,27 @@ export default class AddNewCabinet extends Component {
                                 <FormControl type="text" name="description" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
+                        <Col xs={6} md={3}>
+                            {/*Toggle Drawer Parts*/}
+                            <FormGroup>
+                                <Checkbox inline name="drawerCheckbox" onChange={this.handleCheckboxChange}>Does This Cabinet Have Drawers?</Checkbox>
+                            </FormGroup>
+                        </Col>
                     </Row>
 
-                    {/*Add Cabinet Parts*/}
-                    <ControlLabel>Add Cabinet Parts</ControlLabel>
+                    {/*Add Cabinet Construction Parts*/}
+                    <ControlLabel>Add Cabinet Construction Parts</ControlLabel>
                     <AddCabinetPart addPartCallback={this.addPart} />
+
+                    {/*Add Drawer Types & Sizes*/}
+                    <div>
+                        {this.state.drawerCheckbox ? (
+                            <AddDrawers />
+                        ) : (
+                            <div></div>
+                        )}
+                    </div>
+                    
 
                     {/*Display Added Cabinet Parts*/}
                     <CabinetPartsList parts={this.state.constructionParts} />
