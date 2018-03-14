@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Cabinets from '../api/Cabinets';
 import CabinetPartsList from './CabinetPartsList';
 import AddCabinetPart from './AddCabinetPart';
-import AddDrawers from './AddDrawers'
 
 import {
     FormGroup,
@@ -107,17 +106,7 @@ export default class AddNewCabinet extends Component {
 
                     {/*Add Cabinet Construction Parts*/}
                     <ControlLabel>Add Cabinet Construction Parts</ControlLabel>
-                    <AddCabinetPart addPartCallback={this.addPart} />
-
-                    {/*Add Drawer Types & Sizes*/}
-                    <div>
-                        {this.state.drawerCheckbox ? (
-                            <AddDrawers />
-                        ) : (
-                            <div></div>
-                        )}
-                    </div>
-                    
+                    <AddCabinetPart addPartCallback={this.addPart} drawers={this.props.drawers}/>
 
                     {/*Display Added Cabinet Parts*/}
                     <CabinetPartsList parts={this.state.constructionParts} />

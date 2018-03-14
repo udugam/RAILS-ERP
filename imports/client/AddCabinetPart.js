@@ -55,12 +55,27 @@ export default class AddCabinetPart extends Component {
                                     <option value="back">Back</option>
                                     <option value="shelf">Shelf</option>
                                     <option value="fixedShelf">Fixed Shelf</option>
-                                    <option value="drwBoxSide">Drawer Box Side</option>
-                                    <option value="drwBoxFace">Drawer Box Front/Back</option>
-                                    <option value="drwBoxBottom">Drawer Box Bottom</option>
+                                    <option value="drawer">Drawer</option>
                                 </FormControl>
                             </FormGroup>
                         </Col>
+                        {this.state.partName==="drawer" && 
+                            <Col xs={6} md={4}>
+                                <FormGroup>
+                                <ControlLabel>Drawer Type</ControlLabel>
+                                    <FormControl componentClass="select" name="drawerID" onChange={this.handleInputChange}>
+                                        <option>...</option>
+                                        {this.props.drawers.map((storedDrawer) => {
+                                            return (
+                                              <option value={storedDrawer._id} key={storedDrawer._id}>
+                                                {storedDrawer.manufacturer}-{storedDrawer.model}-{storedDrawer.height}
+                                              </option>
+                                            )
+                                          })}
+                                    </FormControl>
+                                </FormGroup>
+                            </Col>
+                        }
                         <Col xs={6} md={4}>
                             {/*Input Program Path*/}
                             <FormGroup>

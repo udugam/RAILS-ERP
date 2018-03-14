@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import Cabinets from '../api/Cabinets';
+import Drawers from '../api/Drawers'
 import AddNewCabinet from './AddNewCabinet';
-
 
 import {
   PageHeader, 
@@ -42,7 +42,7 @@ class CabinetDatabase extends Component {
             Add New Cabinet
           </Button>
           <Panel collapsible expanded={this.state.open}>
-            <AddNewCabinet />
+            <AddNewCabinet drawers={this.props.drawers}/>
           </Panel>
         </div>
 
@@ -71,9 +71,11 @@ class CabinetDatabase extends Component {
 export default createContainer(() => {
   if(Meteor.userId()){
     let cabinetsSub = Meteor.subscribe('allCabinets');
+    let drawersSub = Meteor.subscribe('allDrawers');
   }
 
   return {
     cabinets: Cabinets.find({}).fetch(),
+    drawers: Drawers.find({}).fetch()
   }
 }, CabinetDatabase);
