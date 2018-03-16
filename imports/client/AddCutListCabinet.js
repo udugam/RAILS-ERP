@@ -11,6 +11,8 @@ import {
     Checkbox,
 } from 'React-Bootstrap';
 
+import Cabinets from '../api/Cabinets'
+
 export default class AddCutListCabinet extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +35,12 @@ export default class AddCutListCabinet extends Component {
         this.setState({
           [name]: value,
         });
+    }
+
+    drawerCheck() {
+        //find and store selected cabinet using this.state.cabCode
+        //search through cabinet's parts list for a drawerfront
+        //if at least one is found return true, else return false
     }
 
     render() {
@@ -63,6 +71,15 @@ export default class AddCutListCabinet extends Component {
                                 </FormControl>
                             </FormGroup>
                         </Col>
+                        {this.drawerCheck() && 
+                            <Col xs={6} md={4}>
+                                {/*Input Drawer Brand & Type*/}
+                                <FormGroup>
+                                    <ControlLabel>Drawer Type</ControlLabel>
+                                    <FormControl type="text" name="partProgramPath" onChange={this.handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        }
                         <Col xs={6} md={3}>
                             {/*Input Cabinet Width*/}
                             <FormGroup>

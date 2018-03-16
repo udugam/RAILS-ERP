@@ -13,6 +13,7 @@ export default class CabinetPartsList extends Component {
                     <tr>
                         <th>Part Name</th>
                         <th>Program Path and Name </th>
+                        <th>Qty </th>
                     </tr>
                     {this.props.parts.map((part) => {
                         return (
