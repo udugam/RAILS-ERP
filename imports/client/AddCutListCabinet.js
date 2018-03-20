@@ -23,8 +23,9 @@ export default class AddCutListCabinet extends Component {
             cabHeight: 0,
             cabDepth: 0,
             cabMaterial: "",
+            drawer: false
         }
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this)
     }
 
     handleInputChange(event) {
@@ -34,13 +35,19 @@ export default class AddCutListCabinet extends Component {
    
         this.setState({
           [name]: value,
-        });
+        }, () => this.drawerCheck());
     }
 
     drawerCheck() {
-        //find and store selected cabinet using this.state.cabCode
-        //search through cabinet's parts list for a drawerfront
-        //if at least one is found return true, else return false
+        if (Cabinets.findOne({code: this.state.cabCode, "constructionParts.partName": "drawerFront"})) {
+            this.setState({
+                drawer: true,
+            });
+        } else {
+            this.setState({
+                drawer: false,
+            });
+        }    
     }
 
     render() {
@@ -71,7 +78,7 @@ export default class AddCutListCabinet extends Component {
                                 </FormControl>
                             </FormGroup>
                         </Col>
-                        {this.drawerCheck() && 
+                        {this.state.drawer && 
                             <Col xs={6} md={4}>
                                 {/*Input Drawer Brand & Type*/}
                                 <FormGroup>
