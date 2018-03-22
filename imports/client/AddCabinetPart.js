@@ -68,15 +68,13 @@ export default class AddCabinetPart extends Component {
                                 </FormGroup>
                             </Col>
                         }
-                        {this.state.partName!=="drawerFront" && 
-                            <Col xs={6} md={4}>
-                                {/*Input Program Path*/}
-                                <FormGroup>
-                                    <ControlLabel>Program Path for Part</ControlLabel>
-                                    <FormControl type="text" name="partProgramPath" onChange={this.handleInputChange} />
-                                </FormGroup>
-                            </Col>
-                        }
+                        <Col xs={6} md={4}>
+                            {/*Input Program Path*/}
+                            <FormGroup>
+                                <ControlLabel>{this.state.partName==="drawerFront" ? 'Path to Drawer Programs Folder' : 'Path to Program'}</ControlLabel>
+                                <FormControl type="text" name="partProgramPath" onChange={this.handleInputChange} />
+                            </FormGroup>
+                        </Col>
                         <Col xs={6} md={4}>
                             {/*Input Quantity*/}
                             <FormGroup>

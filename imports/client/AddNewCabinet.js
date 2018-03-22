@@ -20,7 +20,6 @@ export default class AddNewCabinet extends Component {
         this.state = {
             code: "",
             description: "",
-            drawerCheckbox: false,
             constructionParts: [],
             hardwareParts: [],
             cabWidth: 0,
@@ -94,12 +93,6 @@ export default class AddNewCabinet extends Component {
                             <FormGroup>
                                 <ControlLabel>Description</ControlLabel>
                                 <FormControl type="text" name="description" onChange={this.handleInputChange} />
-                            </FormGroup>
-                        </Col>
-                        <Col xs={6} md={3}>
-                            {/*Toggle Drawer Parts*/}
-                            <FormGroup>
-                                <Checkbox inline name="drawerCheckbox" onChange={this.handleCheckboxChange}>Does This Cabinet Have Drawers?</Checkbox>
                             </FormGroup>
                         </Col>
                     </Row>

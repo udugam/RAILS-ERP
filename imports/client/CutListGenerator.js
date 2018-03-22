@@ -7,6 +7,7 @@ import GenerateCutListCSV from './GenerateCutListCSV';
 
 import Cabinets from '../api/Cabinets';
 import Materials from '../api/Materials';
+import Drawers from '../api/Drawers'
 
 import {
   PageHeader, 
@@ -43,7 +44,7 @@ class CutListGenerator extends Component {
         <div>
           <PageHeader>Cut-List Generator</PageHeader>
           <Panel>
-               <AddCutListCabinet cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList}/>
+               <AddCutListCabinet cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList} drawers={this.props.drawers}/>
           </Panel>
         </div>
 
@@ -61,12 +62,14 @@ class CutListGenerator extends Component {
 
 export default createContainer(() => {
     if(Meteor.userId()){
-      let cabinetsSub = Meteor.subscribe('allCabinets');
-      let materialsSub = Meteor.subscribe('allMaterials');
+      let cabinetsSub = Meteor.subscribe('allCabinets')
+      let materialsSub = Meteor.subscribe('allMaterials')
+      let drawersSub = Meteor.subscribe('allDrawers')
     }
 
     return {
       cabinets: Cabinets.find({}).fetch(),
       materials: Materials.find({}).fetch(),
+      drawers: Drawers.find({}).fetch()
     }
   }, CutListGenerator);

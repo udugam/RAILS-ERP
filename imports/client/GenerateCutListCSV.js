@@ -29,6 +29,9 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabDepth-listedPart.partThickness;
+                        if (listedCabinet.drawer===true) {
+                            listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+"-"+listedCabinet.drawerType+".pgmx"
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'rGable':
@@ -91,6 +94,8 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness);
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
+                    //case 'drawerFront':
+
                     default:
                         console.log("Part Does Not Exist"); 
                 }

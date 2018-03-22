@@ -23,7 +23,8 @@ export default class AddCutListCabinet extends Component {
             cabHeight: 0,
             cabDepth: 0,
             cabMaterial: "",
-            drawer: false
+            drawer: false,
+            drawerType: ""
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -83,7 +84,16 @@ export default class AddCutListCabinet extends Component {
                                 {/*Input Drawer Brand & Type*/}
                                 <FormGroup>
                                     <ControlLabel>Drawer Type</ControlLabel>
-                                    <FormControl type="text" name="partProgramPath" onChange={this.handleInputChange} />
+                                    <FormControl componentClass="select" name="drawerType" onChange={this.handleInputChange}>
+                                        <option>...</option>
+                                        {this.props.drawers.map((storedDrawer) => {
+                                            return (
+                                                <option value={storedDrawer.model} key={storedDrawer.model}>
+                                                    {storedDrawer.manufacturer}-{storedDrawer.model}
+                                                </option>
+                                            )
+                                        })}
+                                    </FormControl>
                                 </FormGroup>
                             </Col>
                         }
