@@ -38,6 +38,9 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabDepth-listedPart.partThickness;
+                        if (listedCabinet.drawer===true) {
+                            listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+"-"+listedCabinet.drawerType+".pgmx"
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'stretcher':
@@ -68,6 +71,11 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-5;
                         listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
+                        if (Cabinets.findOne({code: listedCabinet.cabCode, "constructionParts.partName": "stretcher"})) {
+                            listedPart.partQty = 1
+                        } else {
+                            listedPart.partQty = Math.round(listedCabinet.cabHeight/250)-1
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'fixedShelf':
@@ -94,8 +102,16 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness);
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
-                    //case 'drawerFront':
-
+                    case 'drawerFront':
+                        //if metal drawer, then create file name for metal drawer pieces
+                        //if wood drawer, then create file name for wood drawer pieces
+                        break
+                    case 'blindPanel':
+                        listedPart.partThickness = material.thickness
+                        listedPart.partLength = listedCabinet.cabHeight
+                        listedPart.partWidth = listedCabinet.width-listedCabinet.doorSpace-listedCabinet.fillerReveal-50
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
                     default:
                         console.log("Part Does Not Exist"); 
                 }

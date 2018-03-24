@@ -56,6 +56,7 @@ export default class AddCabinetPart extends Component {
                                     <option value="shelf">Shelf</option>
                                     <option value="fixedShelf">Fixed Shelf</option>
                                     <option value="drawerFront">Drawer Front</option>
+                                    <option value="blindPanel">Blind Panel</option>
                                 </FormControl>
                             </FormGroup>
                         </Col>
