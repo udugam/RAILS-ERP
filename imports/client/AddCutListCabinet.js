@@ -24,6 +24,7 @@ export default class AddCutListCabinet extends Component {
             cabDepth: 0,
             cabMaterial: "",
             drawer: false,
+            pantry: false,
             drawerType: ""
         }
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -36,7 +37,7 @@ export default class AddCutListCabinet extends Component {
    
         this.setState({
           [name]: value,
-        }, () => this.drawerCheck());
+        }, () => {this.drawerCheck(),this.pantryCheck()});
     }
 
     drawerCheck() {
@@ -47,6 +48,19 @@ export default class AddCutListCabinet extends Component {
         } else {
             this.setState({
                 drawer: false,
+            });
+        }    
+    }
+
+    pantryCheck() {
+        const cabCode = this.state.cabCode
+        if (cabCode.includes("P")) {
+            this.setState({
+                pantry: true,
+            });
+        } else {
+            this.setState({
+                pantry: false,
             });
         }    
     }
@@ -79,6 +93,7 @@ export default class AddCutListCabinet extends Component {
                                 </FormControl>
                             </FormGroup>
                         </Col>
+                        {/*This section of code will check to see if a cabinet has a drawer, and if so will render so that the user can select the drawer type*/}
                         {this.state.drawer && 
                             <Col xs={6} md={4}>
                                 {/*Input Drawer Brand & Type*/}
@@ -97,6 +112,19 @@ export default class AddCutListCabinet extends Component {
                                 </FormGroup>
                             </Col>
                         }
+                        {/*This section of code will check to see if a pantry is selected, and if so will render two fields for the user to set the heights up the upper and lower cabinets*/}
+                        {this.state.pantry && 
+                            <Col xs={6} md={4}>
+                                {/*Input Pantry Cabinet Heights, All pantries are build as two cabinets*/}
+                                <FormGroup>
+                                    <ControlLabel>Upper Cabinet Height</ControlLabel>
+                                    <FormControl type="number" name="pantryUpperHeight" onChange={this.handleInputChange} />
+                                    
+                                    <ControlLabel>Lower Cabinet Height</ControlLabel>
+                                    <FormControl type="number" name="pantryBaseHeight" onChange={this.handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        }
                         <Col xs={6} md={3}>
                             {/*Input Cabinet Width*/}
                             <FormGroup>
@@ -104,13 +132,15 @@ export default class AddCutListCabinet extends Component {
                                 <FormControl type="number" name="cabWidth" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
-                        <Col xs={6} md={3}>
-                            {/*Input Cabinet Height*/}
-                            <FormGroup>
-                                <ControlLabel>Height (mm)</ControlLabel>
-                                <FormControl type="number" name="cabHeight" onChange={this.handleInputChange} />
-                            </FormGroup>
-                        </Col>
+                        {!this.state.pantry && 
+                            <Col xs={6} md={3}>
+                                {/*Input Cabinet Height*/}
+                                <FormGroup>
+                                    <ControlLabel>Height (mm)</ControlLabel>
+                                    <FormControl type="number" name="cabHeight" onChange={this.handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        }
                         <Col xs={6} md={3}>
                             {/*Input Cabinet Depth*/}
                             <FormGroup>

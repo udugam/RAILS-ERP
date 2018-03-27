@@ -11,6 +11,7 @@ export default class CabinetList extends Component {
             <Table>
                  <tbody>
                     <tr>
+                        <th>Cabinet Number</th>
                         <th>Cabinet Code</th>
                         <th>Width (mm)</th>
                         <th>Height (mm)</th>
@@ -20,6 +21,7 @@ export default class CabinetList extends Component {
                     {this.props.cutListCabinets.map((cabinet) => {
                         return (
                             <tr>
+                                <td>{cabinet.cabNum}</td>
                                 <td>{cabinet.cabCode}</td>
                                 <td>{cabinet.cabWidth}</td>
                                 <td>{cabinet.cabHeight}</td>

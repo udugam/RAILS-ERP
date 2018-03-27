@@ -29,10 +29,29 @@ class CutListGenerator extends Component {
   }
 
   addCabinetToList = (cabinetData) => {
-    cabinets = this.state.cabinets;
-    index = cabinets.length;
-    cabinets[index] = cabinetData;
+    if (cabinetData.pantry===true) {
+
+      //create two cabinet data sets and assign each the heights defined by the user
+      const lowerCabinetData = Object.assign({},cabinetData)
+      lowerCabinetData.cabHeight = cabinetData.pantryBaseHeight
+      lowerCabinetData.cabNum = lowerCabinetData.cabNum+"-base"
+
+      const upperCabinetData = Object.assign({},cabinetData)
+      upperCabinetData.cabHeight = cabinetData.pantryUpperHeight
+      upperCabinetData.cabNum = upperCabinetData.cabNum+"-upper"
+
+      //add two cabinets to array
+      cabinets = this.state.cabinets
+      index = cabinets.length
+      cabinets[index] = lowerCabinetData
+      cabinets[index+1] = upperCabinetData
+    } else {
+      cabinets = this.state.cabinets;
+      index = cabinets.length;
+      cabinets[index] = cabinetData;  
+    }
     
+
     this.setState({
         cabinets: cabinets
     });

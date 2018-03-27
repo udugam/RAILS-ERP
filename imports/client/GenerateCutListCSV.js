@@ -109,7 +109,11 @@ export default class GenerateCutListCSV extends Component {
                     case 'blindPanel':
                         listedPart.partThickness = material.thickness
                         listedPart.partLength = listedCabinet.cabHeight
-                        listedPart.partWidth = listedCabinet.width-listedCabinet.doorSpace-listedCabinet.fillerReveal-50
+                        if (Cabinets.findOne({code: listedCabinet.cabCode, "constructionParts.partName": "stretcher"})) {
+                            listedPart.partLength = 260
+                        } else {
+                            listedPart.partLength = 560
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     default:
