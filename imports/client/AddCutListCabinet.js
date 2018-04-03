@@ -37,7 +37,7 @@ export default class AddCutListCabinet extends Component {
    
         this.setState({
           [name]: value,
-        }, () => {this.drawerCheck(),this.pantryCheck()});
+        }, () => {this.drawerCheck(),this.cabTypeCheck()});
     }
 
     drawerCheck() {
@@ -52,9 +52,9 @@ export default class AddCutListCabinet extends Component {
         }    
     }
 
-    pantryCheck() {
+    cabTypeCheck() {
         const cabCode = this.state.cabCode
-        if (cabCode.includes("P")) {
+        if (cabCode.includes("P") && Cabinets.findOne({code: cabCode, "type": "pantry"})) { //add cabinet type property to all cabinets
             this.setState({
                 pantry: true,
             });

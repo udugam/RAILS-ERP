@@ -95,6 +95,19 @@ export default class AddNewCabinet extends Component {
                                 <FormControl type="text" name="description" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
+                        <Col xs={6} md={3}>
+                            {/*Select Cabinet Type*/}
+                            <FormGroup>
+                                <ControlLabel>Cabinet Type</ControlLabel>
+                                <FormControl componentClass="select" name="type" onChange={this.handleInputChange}>
+                                    <option>...</option>
+                                    <option value="base">Base</option>
+                                    <option value="upper">Upper</option>
+                                    <option value="pantry">Pantry</option>
+                                    <option value="drawerBox">Wooden Drawer Box</option>
+                                </FormControl>
+                            </FormGroup>
+                        </Col>
                     </Row>
 
                     {/*Add Cabinet Construction Parts*/}

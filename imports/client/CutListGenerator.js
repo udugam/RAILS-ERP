@@ -61,7 +61,7 @@ class CutListGenerator extends Component {
     return (
       <div>
         <div>
-          <PageHeader>Cut-List Generator</PageHeader>
+          <PageHeader>Production-Lists Generator</PageHeader>
           <Panel>
                <AddCutListCabinet cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList} drawers={this.props.drawers}/>
           </Panel>
