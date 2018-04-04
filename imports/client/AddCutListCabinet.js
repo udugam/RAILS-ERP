@@ -17,15 +17,15 @@ export default class AddCutListCabinet extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cabNum: "",
+            cabNum: 1,
             cabCode: "",
             cabWidth: 0,
             cabHeight: 0,
             cabDepth: 0,
             cabMaterial: "",
-            drawer: false,
-            pantry: false,
-            drawerType: ""
+            cabType: "",
+            type: "",
+            overideDims: false,
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -38,6 +38,14 @@ export default class AddCutListCabinet extends Component {
         this.setState({
           [name]: value,
         }, () => {this.drawerCheck(),this.cabTypeCheck()});
+    }
+
+    handleAddCabinet() {
+        const nextCabNum = this.state.cabNum+1
+        this.setState({
+            cabNum: nextCabNum,
+        });
+        this.props.addCabinetCallback(this.state)
     }
 
     drawerCheck() {
@@ -54,15 +62,31 @@ export default class AddCutListCabinet extends Component {
 
     cabTypeCheck() {
         const cabCode = this.state.cabCode
-        if (cabCode.includes("P") && Cabinets.findOne({code: cabCode, "type": "pantry"})) { //add cabinet type property to all cabinets
-            this.setState({
-                pantry: true,
-            });
+        const cabinet = Cabinets.findOne({code: cabCode})
+        if (cabinet) {
+            if (cabinet.type==="pantry") {
+                this.setState({
+                    type: "pantry",
+                    cabDepth: 600
+                });
+            } else if (cabinet.type==="base") {
+                this.setState({
+                    type: "base",
+                    cabHeight: 770,
+                    cabDepth: 600,
+                });
+            } else if (cabinet.type==="upper") {
+                this.setState({
+                    type: "upper",
+                    cabDepth: 305,
+                });
+            }
         } else {
             this.setState({
-                pantry: false,
+                type: "",
             });
-        }    
+        }
+
     }
 
     render() {
@@ -74,7 +98,7 @@ export default class AddCutListCabinet extends Component {
                             {/*Input Cabinet Number*/}
                             <FormGroup>
                                 <ControlLabel>Cabinet Number</ControlLabel>
-                                <FormControl type="text" name="cabNum" onChange={this.handleInputChange} />
+                                <FormControl type="number" name="cabNum" placeholder={this.state.cabNum} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs={6} md={3}>
@@ -113,7 +137,7 @@ export default class AddCutListCabinet extends Component {
                             </Col>
                         }
                         {/*This section of code will check to see if a pantry is selected, and if so will render two fields for the user to set the heights up the upper and lower cabinets*/}
-                        {this.state.pantry && 
+                        {this.state.type==="pantry" && 
                             <Col xs={6} md={4}>
                                 {/*Input Pantry Cabinet Heights, All pantries are build as two cabinets*/}
                                 <FormGroup>
@@ -132,7 +156,7 @@ export default class AddCutListCabinet extends Component {
                                 <FormControl type="number" name="cabWidth" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
-                        {!this.state.pantry && 
+                        {(this.state.overideDims || this.state.type==="upper") && 
                             <Col xs={6} md={3}>
                                 {/*Input Cabinet Height*/}
                                 <FormGroup>
@@ -141,13 +165,15 @@ export default class AddCutListCabinet extends Component {
                                 </FormGroup>
                             </Col>
                         }
-                        <Col xs={6} md={3}>
+                        {this.state.overideDims && 
+                            <Col xs={6} md={3}>
                             {/*Input Cabinet Depth*/}
-                            <FormGroup>
-                                <ControlLabel>Depth (mm)</ControlLabel>
-                                <FormControl type="number" name="cabDepth" onChange={this.handleInputChange} />
-                            </FormGroup>
-                        </Col>
+                                <FormGroup>
+                                    <ControlLabel>Depth (mm)</ControlLabel>
+                                    <FormControl type="number" name="cabDepth" onChange={this.handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        }
                     </Row>
                     <Row>
                         <Col xs={6} md={4}>
@@ -168,7 +194,7 @@ export default class AddCutListCabinet extends Component {
                         </Col>
                     </Row>   
                 </Grid>
-                <Button block bsSize='large' onClick={() => this.props.addCabinetCallback(this.state)}>Add Cabinet to Cutlist</Button>
+                <Button block bsSize='large' onClick={() => this.handleAddCabinet()}>Add Cabinet to Cutlist</Button>
             </form>
         );
     }

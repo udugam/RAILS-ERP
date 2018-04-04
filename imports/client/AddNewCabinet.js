@@ -25,6 +25,7 @@ export default class AddNewCabinet extends Component {
             cabWidth: 0,
             cabDepth: 0,
             cabHeight: 0,
+            type: "" 
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
@@ -70,9 +71,10 @@ export default class AddNewCabinet extends Component {
         const cabWidth = this.state.cabWidth; 
         const cabDepth = this.state.cabDepth;
         const cabHeight = this.state.cabHeight;
+        const type = this.state.type
     
         if (code != '') {
-          Meteor.call('insertNewCabinet',code,description,constructionParts,hardwareParts,cabWidth,cabDepth,cabHeight);
+          Meteor.call('insertNewCabinet',code,description,constructionParts,hardwareParts,cabWidth,cabDepth,cabHeight, type);
         }
     }
 

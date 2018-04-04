@@ -29,7 +29,7 @@ class CutListGenerator extends Component {
   }
 
   addCabinetToList = (cabinetData) => {
-    if (cabinetData.pantry===true) {
+    if (cabinetData.cabType==="pantry") {
 
       //create two cabinet data sets and assign each the heights defined by the user
       const lowerCabinetData = Object.assign({},cabinetData)

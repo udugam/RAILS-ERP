@@ -8,7 +8,7 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods( {
-    insertNewCabinet(code,description,constructionParts,hardwareParts,cabWidth,cabDepth,cabHeight) {
+    insertNewCabinet(code,description,constructionParts,hardwareParts,cabWidth,cabDepth,cabHeight, type) {
       if(Meteor.userId()) {
         Cabinets.insert({
           code: code,
@@ -18,6 +18,7 @@ if (Meteor.isServer) {
           cabWidth: cabWidth, 
           cabDepth: cabDepth,
           cabHeight: cabHeight,
+          type: type
         });
       }
     }
