@@ -104,6 +104,7 @@ export default class AddNewCabinet extends Component {
                                 <FormControl componentClass="select" name="type" onChange={this.handleInputChange}>
                                     <option>...</option>
                                     <option value="base">Base</option>
+                                    <option value="vanity">Vanity</option>
                                     <option value="upper">Upper</option>
                                     <option value="pantry">Pantry</option>
                                     <option value="drawerBox">Wooden Drawer Box</option>

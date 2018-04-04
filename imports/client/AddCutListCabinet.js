@@ -74,7 +74,13 @@ export default class AddCutListCabinet extends Component {
                     type: "base",
                     cabHeight: 770,
                     cabDepth: 600,
-                });
+                })
+            } else if (cabinet.type==="vanity") {
+                this.setState({
+                    type: "vanity",
+                    cabHeight: 680,
+                    cabDepth: 540,
+                })
             } else if (cabinet.type==="upper") {
                 this.setState({
                     type: "upper",
