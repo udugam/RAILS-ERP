@@ -25,7 +25,8 @@ export default class AddCutListCabinet extends Component {
             cabMaterial: "",
             cabType: "",
             type: "",
-            overideDims: false,
+            overrideDims: false,
+            panel: false
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -38,6 +39,12 @@ export default class AddCutListCabinet extends Component {
         this.setState({
           [name]: value,
         }, () => {this.drawerCheck(),this.cabTypeCheck()});
+    }
+
+    handleCheckboxChange(checked, name) {
+        this.setState({
+            [name]: checked,
+        })
     }
 
     handleAddCabinet() {
@@ -162,21 +169,21 @@ export default class AddCutListCabinet extends Component {
                                 <FormControl type="number" name="cabWidth" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
-                        {(this.state.overideDims || this.state.type==="upper") && 
+                        {(this.state.overrideDims || this.state.type==="upper") && 
                             <Col xs={6} md={3}>
                                 {/*Input Cabinet Height*/}
                                 <FormGroup>
                                     <ControlLabel>Height (mm)</ControlLabel>
-                                    <FormControl type="number" name="cabHeight" onChange={this.handleInputChange} />
+                                    <FormControl type="number" name="cabHeight" placeholder={this.state.cabHeight} onChange={this.handleInputChange} />
                                 </FormGroup>
                             </Col>
                         }
-                        {this.state.overideDims && 
+                        {this.state.overrideDims && 
                             <Col xs={6} md={3}>
                             {/*Input Cabinet Depth*/}
                                 <FormGroup>
                                     <ControlLabel>Depth (mm)</ControlLabel>
-                                    <FormControl type="number" name="cabDepth" onChange={this.handleInputChange} />
+                                    <FormControl type="number" name="cabDepth" placeholder={this.state.cabDepth} onChange={this.handleInputChange} />
                                 </FormGroup>
                             </Col>
                         }
@@ -196,6 +203,36 @@ export default class AddCutListCabinet extends Component {
                                     )
                                     })}
                                 </FormControl>
+                            </FormGroup>
+                        </Col>
+                        <Col xs={6} md={4}>
+                            {/*Select to overide standard Dimensions*/}
+                            <FormGroup>
+                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "overrideDims")}>Override Dimensions</Checkbox>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={6} md={4}>
+                            {/*Select DoorStyle*/}
+                            <FormGroup>
+                                <ControlLabel>Doorstyle</ControlLabel>
+                                <FormControl componentClass="select" name="doorStyle" onChange={this.handleInputChange}>
+                                    <option>...</option>
+                                    {this.props.doorStyles.map((storedDoorStyle) => {
+                                    return (
+                                        <option value={storedDoorStyle.name} key={storedDoorStyle._id}>
+                                            {storedDoorStyle.name}
+                                        </option>
+                                    )
+                                    })}
+                                </FormControl>
+                            </FormGroup>
+                        </Col>
+                        <Col xs={6} md={4}>
+                            {/*Indicate if a Panel exists on either side of Cabinet*/}
+                            <FormGroup>
+                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "panel")}>Adjacent Panel?</Checkbox>
                             </FormGroup>
                         </Col>
                     </Row>   
