@@ -27,7 +27,8 @@ export default class AddCutListCabinet extends Component {
             type: "",
             overrideDims: false,
             panel: false,
-            rearCleat: false
+            rearCleat: false,
+            lineBore: false
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -197,10 +198,13 @@ export default class AddCutListCabinet extends Component {
                             </FormGroup>
                         </Col>
                         {this.state.type==="upper" && 
-                            <Col xs={6} md={4}>
+                        <Col xs={6} md={4}>
                             {/*Select to inset backs for rear cleat for hanging*/}
                             <FormGroup>
                                 <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "rearCleat")}>Inset Back for Rear Cleat</Checkbox>
+                            </FormGroup>
+                            <FormGroup>
+                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "lineBore")}>Line Bore Shelf Holes</Checkbox>
                             </FormGroup>
                         </Col>
                         }

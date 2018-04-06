@@ -39,6 +39,12 @@ export default class GenerateCutListCSV extends Component {
                             const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
                         }
+                        if (listedCabinet.lineBore===true) {
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-lineBore"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'rGable':
@@ -52,6 +58,12 @@ export default class GenerateCutListCSV extends Component {
                             const originalProgramPath = listedPart.partProgramPath
                             const slicedProgramPath = originalProgramPath.slice(0,-5)
                             const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
+                        }
+                        if (listedCabinet.lineBore===true) {
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-lineBore"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
                         }
                         this.updateCSV(listedPart,listedCabinet.cabNum)
