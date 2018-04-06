@@ -7,8 +7,9 @@ import Cabinets from '../api/Cabinets';
 import Materials from '../api/Materials';
 import CsvCreator from 'react-csv-creator';
 
-export default class GenerateCutListCSV extends Component {
+const rearCleatThickness = 19
 
+export default class GenerateCutListCSV extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,6 +33,12 @@ export default class GenerateCutListCSV extends Component {
                         if (listedCabinet.drawer===true) {
                             listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+"-"+listedCabinet.drawerType+".pgmx"
                         }
+                        if (listedCabinet.rearCleat===true) {
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'rGable':
@@ -41,36 +48,58 @@ export default class GenerateCutListCSV extends Component {
                         if (listedCabinet.drawer===true) {
                             listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+"-"+listedCabinet.drawerType+".pgmx"
                         }
-                        this.updateCSV(listedPart,listedCabinet.cabNum);
-                        break;
+                        if (listedCabinet.rearCleat===true) {
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
+                        }
+                        this.updateCSV(listedPart,listedCabinet.cabNum)
+                        break
                     case 'stretcher':
-                        listedPart.partThickness = material.thickness;
-                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
-                        listedPart.partWidth = 100;
-                        this.updateCSV(listedPart,listedCabinet.cabNum);
-                        break;
+                        listedPart.partThickness = material.thickness
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
+                        listedPart.partWidth = 100
+                        this.updateCSV(listedPart,listedCabinet.cabNum)
+                        break
                     case 'bottom':
-                        listedPart.partThickness = material.thickness;
-                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
-                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
-                        this.updateCSV(listedPart,listedCabinet.cabNum);
-                        break;
+                        listedPart.partThickness = material.thickness
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
+                        if (listedCabinet.rearCleat===true) {
+                            listedPart.partWidth = listedCabinet.cabDepth
+                        } else {
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness
+                        }
+                        this.updateCSV(listedPart,listedCabinet.cabNum)
+                        break
                     case 'top':
-                        listedPart.partThickness = material.thickness;
-                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
-                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
-                        this.updateCSV(listedPart,listedCabinet.cabNum);
-                        break;
+                        listedPart.partThickness = material.thickness
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
+                        if (listedCabinet.rearCleat===true) {
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-rearCleatThickness
+                        } else {
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness
+                        }
+                        this.updateCSV(listedPart,listedCabinet.cabNum)
+                        break
                     case 'back':
-                        listedPart.partThickness = material.thickness;
-                        listedPart.partLength = listedCabinet.cabHeight;
-                        listedPart.partWidth = listedCabinet.cabWidth;
-                        this.updateCSV(listedPart,listedCabinet.cabNum);
-                        break;
+                        listedPart.partThickness = material.thickness
+                        listedPart.partWidth = listedCabinet.cabWidth
+                        if (listedCabinet.rearCleat===true) {
+                            listedPart.partLength = listedCabinet.cabHeight-material.thickness
+                        } else {
+                            listedPart.partLength = listedCabinet.cabHeight
+                        }
+                        this.updateCSV(listedPart,listedCabinet.cabNum)
+                        break
                     case 'shelf':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-5;
-                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
+                        if (listedCabinet.rearCleat===true) {
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7-rearCleatThickness;
+                        } else {
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
+                        }
                         if (Cabinets.findOne({code: listedCabinet.cabCode, "constructionParts.partName": "stretcher"})) {
                             listedPart.partQty = 1
                         } else {

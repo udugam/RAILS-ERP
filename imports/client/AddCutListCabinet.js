@@ -26,7 +26,8 @@ export default class AddCutListCabinet extends Component {
             cabType: "",
             type: "",
             overrideDims: false,
-            panel: false
+            panel: false,
+            rearCleat: false
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -190,6 +191,22 @@ export default class AddCutListCabinet extends Component {
                     </Row>
                     <Row>
                         <Col xs={6} md={4}>
+                            {/*Select to overide standard Dimensions*/}
+                            <FormGroup>
+                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "overrideDims")}>Override Dimensions</Checkbox>
+                            </FormGroup>
+                        </Col>
+                        {this.state.type==="upper" && 
+                            <Col xs={6} md={4}>
+                            {/*Select to inset backs for rear cleat for hanging*/}
+                            <FormGroup>
+                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "rearCleat")}>Inset Back for Rear Cleat</Checkbox>
+                            </FormGroup>
+                        </Col>
+                        }
+                    </Row>
+                    <Row>
+                        <Col xs={6} md={4}>
                             {/*Select Cabinet Construction Material*/}
                             <FormGroup>
                                 <ControlLabel>Cabinet Material</ControlLabel>
@@ -203,12 +220,6 @@ export default class AddCutListCabinet extends Component {
                                     )
                                     })}
                                 </FormControl>
-                            </FormGroup>
-                        </Col>
-                        <Col xs={6} md={4}>
-                            {/*Select to overide standard Dimensions*/}
-                            <FormGroup>
-                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "overrideDims")}>Override Dimensions</Checkbox>
                             </FormGroup>
                         </Col>
                     </Row>
