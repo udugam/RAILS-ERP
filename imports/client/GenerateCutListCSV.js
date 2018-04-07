@@ -101,6 +101,10 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partWidth = listedCabinet.cabWidth
                         if (listedCabinet.rearCleat===true) {
                             listedPart.partLength = listedCabinet.cabHeight-material.thickness
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
                         } else {
                             listedPart.partLength = listedCabinet.cabHeight
                         }
