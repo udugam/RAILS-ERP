@@ -73,24 +73,24 @@ export default class AddCutListCabinet extends Component {
         const cabCode = this.state.cabCode
         const cabinet = Cabinets.findOne({code: cabCode})
         if (cabinet) {
-            if (cabinet.type==="pantry") {
+            if (cabinet.type==="pantry" && !this.state.overrideDims) {
                 this.setState({
                     type: "pantry",
                     cabDepth: 600
                 });
-            } else if (cabinet.type==="base") {
+            } else if (cabinet.type==="base" && !this.state.overrideDims) {
                 this.setState({
                     type: "base",
                     cabHeight: 770,
                     cabDepth: 600,
                 })
-            } else if (cabinet.type==="vanity") {
+            } else if (cabinet.type==="vanity" && !this.state.overrideDims) {
                 this.setState({
                     type: "vanity",
                     cabHeight: 680,
                     cabDepth: 540,
                 })
-            } else if (cabinet.type==="upper") {
+            } else if (cabinet.type==="upper" && !this.state.overrideDims) {
                 this.setState({
                     type: "upper",
                     cabDepth: 305,

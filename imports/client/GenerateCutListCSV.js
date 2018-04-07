@@ -38,6 +38,7 @@ export default class GenerateCutListCSV extends Component {
                             const slicedProgramPath = originalProgramPath.slice(0,-5)
                             const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
+                            listedPart.partWidth = listedCabinet.cabDepth
                         }
                         if (listedCabinet.lineBore===true) {
                             const originalProgramPath = listedPart.partProgramPath
@@ -59,6 +60,7 @@ export default class GenerateCutListCSV extends Component {
                             const slicedProgramPath = originalProgramPath.slice(0,-5)
                             const newProgramPath = slicedProgramPath+"-rearCleat"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
+                            listedPart.partWidth = listedCabinet.cabDepth
                         }
                         if (listedCabinet.lineBore===true) {
                             const originalProgramPath = listedPart.partProgramPath
