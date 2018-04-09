@@ -22,7 +22,7 @@ import QuotePage from './QuotePage';
 import MainLayout from './layouts/MainLayout';
 import NewProject from './NewProject';
 import CabinetDatabase from './CabinetDatabase';
-import CutListGenerator from './CutListGenerator';
+import ProductionLists from './ProductionLists';
 
 Meteor.startup(() => {
   render(
@@ -41,7 +41,7 @@ Meteor.startup(() => {
         <Route path="/addAccessory" component={NewAccessory}/>
         <Route path="/addMillworkItem" component={NewMillworkItem}/>
         <Route path="/cabinetDatabase" component={CabinetDatabase}/>
-        <Route path="/cutListGenerator" component={CutListGenerator} />
+        <Route path="/productionLists" component={ProductionLists} />
         <Route path="/:id" component={QuotePage}/>
       </Route>
     </Router>,

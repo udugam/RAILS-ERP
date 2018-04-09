@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import AddCutListCabinet from './AddCutListCabinet';
 import CabinetList from './CabinetList';
 import GenerateCutListCSV from './GenerateCutListCSV';
+import DoorList from './cabinet_components/Doors/DoorList'
 
 import Cabinets from '../api/Cabinets';
 import Materials from '../api/Materials';
@@ -16,16 +17,20 @@ import {
   Panel, 
   Table,
   FormGroup,
+  Tabs,
+  Tab
 } from 'React-Bootstrap';
 
 
 
-class CutListGenerator extends Component {
+class ProductionLists extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
         cabinets: [],
+        panels:[],
+        doors:[]
     };
   }
 
@@ -47,34 +52,39 @@ class CutListGenerator extends Component {
       cabinets[index] = lowerCabinetData
       cabinets[index+1] = upperCabinetData
     } else {
-      cabinets = this.state.cabinets;
-      index = cabinets.length;
-      cabinets[index] = cabinetData;  
+      cabinets = this.state.cabinets
+      index = cabinets.length
+      cabinets[index] = cabinetData
     }
     
 
     this.setState({
-        cabinets: cabinets
+        cabinets: cabinets,
     });
 }
 
   render() {
     return (
       <div>
-        <div>
           <PageHeader>Production-Lists Generator</PageHeader>
-          <Panel>
-               <AddCutListCabinet doorStyles= {this.props.doorStyles} cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList} drawers={this.props.drawers}/>
-          </Panel>
-        </div>
-
-        {/*Display Added Cabinets List*/}
-        <Table responsive hover>
-            <CabinetList cutListCabinets={this.state.cabinets} />
-        </Table>
-
-        {/*Generate Cutlist CSV */}
-            <GenerateCutListCSV cutListCabinets={this.state.cabinets} materials={this.props.materials} />
+          <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+            <Tab eventKey={1} title="Cabinets">
+              <AddCutListCabinet doorStyles= {this.props.doorStyles} cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList} drawers={this.props.drawers}/>
+              {/*Display Added Cabinets List*/}
+              <Table responsive hover>
+                <CabinetList cutListCabinets={this.state.cabinets} />
+              </Table>
+              {/*Generate Cutlist CSV */}
+              <GenerateCutListCSV cutListCabinets={this.state.cabinets} materials={this.props.materials} />
+            </Tab>
+            <Tab eventKey={2} title="Panels">
+              Tab 2 content
+            </Tab>
+            <Tab eventKey={3} title="Doors">
+              {/*Display Door Lists*/}
+              <DoorList cabinets={this.state.cabinets} />
+            </Tab>
+          </Tabs>
       </div>
     )
   }
@@ -94,4 +104,4 @@ export default createContainer(() => {
       drawers: Drawers.find({}).fetch(),
       doorStyles: DoorStyles.find({}).fetch()
     }
-  }, CutListGenerator);
+  }, ProductionLists);

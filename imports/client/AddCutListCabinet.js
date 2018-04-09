@@ -9,6 +9,7 @@ import {
     Row,
     Col,
     Checkbox,
+    Panel
 } from 'React-Bootstrap';
 
 import Cabinets from '../api/Cabinets'
@@ -106,7 +107,7 @@ export default class AddCutListCabinet extends Component {
 
     render() {
         return (
-            <form>
+            <Panel>
                 <Grid>
                     <Row>
                         <Col xs={6} md={3}>
@@ -253,7 +254,7 @@ export default class AddCutListCabinet extends Component {
                     </Row>   
                 </Grid>
                 <Button block bsSize='large' onClick={() => this.handleAddCabinet()}>Add Cabinet to Cutlist</Button>
-            </form>
+            </Panel>
         );
     }
 }
