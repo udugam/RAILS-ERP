@@ -127,12 +127,16 @@ export default class GenerateCutListCSV extends Component {
                     case 'shelf':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-5;
-                        if (listedCabinet.rearCleat===true) {
+                        if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
+                            listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)-5
+                        } else if (listedCabinet.rearCleat===true) {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7-rearCleatThickness;
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
                         }
-                        if (Cabinets.findOne({code: listedCabinet.cabCode, "constructionParts.partName": "stretcher"})) {
+
+                        //Shelf Quantity Calculation
+                        if (listedCabinet.type==="base" || listedCabinet.type==="baseCorner") {
                             listedPart.partQty = 1
                         } else {
                             listedPart.partQty = Math.round(listedCabinet.cabHeight/250)-1

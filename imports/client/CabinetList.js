@@ -25,7 +25,7 @@ export default class CabinetList extends Component {
                                 <td>{cabinet.cabCode}</td>
                                 <td>{cabinet.cabWidth}</td>
                                 <td>{cabinet.cabHeight}</td>
-                                <td>{cabinet.cabDepth}</td>
+                                <td>{(cabinet.type==="baseCorner" || cabinet.type==="upperCorner") ? cabinet.cabWidth2 : cabinet.cabDepth}</td> {/*Condition for displaying second width of corner cabinets as depth */}
                                 <td>{cabinet.cabMaterial}</td>
                             </tr>
                         )
