@@ -15,7 +15,7 @@ export default class DoorList extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps)
+    componentWillReceiveProps(nextProps) {}
     //create function that takes this.props.cabinets and calculates doors for each cabinets and adds them to the state
 
 

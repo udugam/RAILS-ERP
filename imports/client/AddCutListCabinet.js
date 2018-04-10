@@ -29,7 +29,7 @@ export default class AddCutListCabinet extends Component {
             overrideDims: false,
             panel: false,
             rearCleat: false,
-            lineBore: false
+            lineBore: false,
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -95,6 +95,17 @@ export default class AddCutListCabinet extends Component {
                 this.setState({
                     type: "upper",
                     cabDepth: 305,
+                });
+            } else if (cabinet.type==="baseCorner") {
+                this.setState({
+                    type: "baseCorner",
+                    cabHeight: 770,
+                    cabDepth: 600
+                });
+            } else if (cabinet.type==="upperCorner") {
+                this.setState({
+                    type: "upperCorner",
+                    cabDepth: 305
                 });
             }
         } else {
@@ -172,6 +183,15 @@ export default class AddCutListCabinet extends Component {
                                 <FormControl type="number" name="cabWidth" onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
+                        {(this.state.type==="baseCorner" || this.state.type==="upperCorner") && 
+                            <Col xs={6} md={4}>
+                                {/*Input Second Cabinet Width for corner cabinets*/}
+                                <FormGroup>
+                                    <ControlLabel>Width 2</ControlLabel>
+                                    <FormControl type="number" name="cabWidth2" onChange={this.handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        }
                         {(this.state.overrideDims || this.state.type==="upper") && 
                             <Col xs={6} md={3}>
                                 {/*Input Cabinet Height*/}

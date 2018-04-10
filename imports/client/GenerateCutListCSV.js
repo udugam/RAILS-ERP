@@ -79,7 +79,9 @@ export default class GenerateCutListCSV extends Component {
                     case 'bottom':
                         listedPart.partThickness = material.thickness
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
-                        if (listedCabinet.rearCleat===true) {
+                        if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
+                            listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)
+                        } else if (listedCabinet.rearCleat===true) {
                             listedPart.partWidth = listedCabinet.cabDepth
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness
@@ -89,7 +91,9 @@ export default class GenerateCutListCSV extends Component {
                     case 'top':
                         listedPart.partThickness = material.thickness
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
-                        if (listedCabinet.rearCleat===true) {
+                        if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
+                            listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)
+                        } else if (listedCabinet.rearCleat===true) {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness-rearCleatThickness
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness
@@ -108,7 +112,17 @@ export default class GenerateCutListCSV extends Component {
                         } else {
                             listedPart.partLength = listedCabinet.cabHeight
                         }
-                        this.updateCSV(listedPart,listedCabinet.cabNum)
+                        
+                        //This condition checks if the cabinet is a corner cabinet and adds two backs of different sizes to the cutlist
+                        if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
+                            listedPart.partQty = 1
+                            const listedPart2 = Object.assign({},listedPart)
+                            listedPart2.partWidth = listedCabinet.cabWidth2-material.thickness
+                            this.updateCSV(listedPart,listedCabinet.cabNum)
+                            this.updateCSV(listedPart2,listedCabinet.cabNum)
+                        } else {
+                            this.updateCSV(listedPart,listedCabinet.cabNum)
+                        }
                         break
                     case 'shelf':
                         listedPart.partThickness = material.thickness;
