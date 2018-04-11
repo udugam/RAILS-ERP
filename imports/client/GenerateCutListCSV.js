@@ -8,6 +8,7 @@ import Materials from '../api/Materials';
 import CsvCreator from 'react-csv-creator';
 
 const rearCleatThickness = 19
+const MWShelfDepth = 485
 
 export default class GenerateCutListCSV extends Component {
     constructor(props) {
@@ -46,6 +47,12 @@ export default class GenerateCutListCSV extends Component {
                             const newProgramPath = slicedProgramPath+"-lineBore"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
                         }
+                        if (listedCabinet.shelfSleeves===true) {
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-7.5mm"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'rGable':
@@ -66,6 +73,12 @@ export default class GenerateCutListCSV extends Component {
                             const originalProgramPath = listedPart.partProgramPath
                             const slicedProgramPath = originalProgramPath.slice(0,-5)
                             const newProgramPath = slicedProgramPath+"-lineBore"+".pgmx"
+                            listedPart.partProgramPath = newProgramPath
+                        }
+                        if (listedCabinet.shelfSleeves===true) {
+                            const originalProgramPath = listedPart.partProgramPath
+                            const slicedProgramPath = originalProgramPath.slice(0,-5)
+                            const newProgramPath = slicedProgramPath+"-7.5mm"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
                         }
                         this.updateCSV(listedPart,listedCabinet.cabNum)
@@ -146,7 +159,11 @@ export default class GenerateCutListCSV extends Component {
                     case 'fixedShelf':
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
-                        listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
+                        if (listedCabinet.cabCode==="MW") {
+                            listedPart.partWidth = MSShelfDepth
+                        } else {
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'drwBoxSide':

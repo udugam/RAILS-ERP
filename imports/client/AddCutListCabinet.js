@@ -30,6 +30,7 @@ export default class AddCutListCabinet extends Component {
             panel: false,
             rearCleat: false,
             lineBore: false,
+            shelfSleeves: false,
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -229,6 +230,9 @@ export default class AddCutListCabinet extends Component {
                             </FormGroup>
                         </Col>
                         }
+                         <FormGroup>
+                            <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "shelfSleeves")}>Shelf Hole Sleeves</Checkbox>
+                        </FormGroup>
                     </Row>
                     <Row>
                         <Col xs={6} md={4}>
