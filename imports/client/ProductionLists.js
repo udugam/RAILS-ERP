@@ -29,8 +29,7 @@ class ProductionLists extends Component {
     super(props);
     this.state = {
         cabinets: [],
-        panels:[],
-        doors:[]
+        panels:[]
     };
   }
 
