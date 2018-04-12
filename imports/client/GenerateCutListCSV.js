@@ -7,8 +7,10 @@ import Cabinets from '../api/Cabinets';
 import Materials from '../api/Materials';
 import CsvCreator from 'react-csv-creator';
 
-const rearCleatThickness = 19
-const MWShelfDepth = 485
+const REARCLEAT = 19
+const MWSHELFDEPTH = 485
+const SHELFDEDUCTION = 5
+const SHELFOFFSET = 7
 
 export default class GenerateCutListCSV extends Component {
     constructor(props) {
@@ -96,6 +98,9 @@ export default class GenerateCutListCSV extends Component {
                             listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)
                         } else if (listedCabinet.rearCleat===true) {
                             listedPart.partWidth = listedCabinet.cabDepth
+                        } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
+                            listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)
+                            listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness
                         }
@@ -107,7 +112,10 @@ export default class GenerateCutListCSV extends Component {
                         if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
                             listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)
                         } else if (listedCabinet.rearCleat===true) {
-                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-rearCleatThickness
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-REARCLEAT
+                        } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
+                            listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)
+                            listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness
                         }
@@ -144,6 +152,9 @@ export default class GenerateCutListCSV extends Component {
                             listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)-5
                         } else if (listedCabinet.rearCleat===true) {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7-rearCleatThickness;
+                        } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
+                            listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)-SHELFOFFSET
+                            listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-SHELFOFFSET
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
                         }
@@ -160,7 +171,7 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partThickness = material.thickness;
                         listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness);
                         if (listedCabinet.cabCode==="MW") {
-                            listedPart.partWidth = MSShelfDepth
+                            listedPart.partWidth = MWSHELFDEPTH
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness;
                         }

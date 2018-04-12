@@ -17,6 +17,7 @@ export default class DisplayDoorList extends Component {
                         <th>Thickness (mm)</th>
                         <th>Door Style</th>
                         <th>Material</th>
+                        <th>Qty</th>
                     </tr>
                     {this.props.doors.map((door) => {
                         return (
@@ -27,6 +28,7 @@ export default class DisplayDoorList extends Component {
                                 <td>{door.thickness}</td>
                                 <td>{door.style}</td>
                                 <td>{door.material}</td>
+                                <td>{door.qty}</td>
                             </tr>
                         )
                     })}

@@ -15,41 +15,46 @@ export default class DoorList extends Component {
         this.state = {
             doors:[]
         }
+        this.generateDoors()
     }
 
     componentWillReceiveProps(nextProps) {
-        this.generateDoors()
+        if (this.props !== nextProps) {
+            this.generateDoors()
+        }
     }
     
 
     generateDoors() {
+        const doorsArray = []
         this.props.cabinets.map((listedCabinet) => {
-            let cabinet = Cabinets.findOne({code:listedCabinet.cabCode});
-            let cabinetParts = cabinet.constructionParts;
-            let doorstyle = DoorStyles.findOne({name:listedCabinet.doorStyle});
+            const cabinet = Cabinets.findOne({code:listedCabinet.cabCode});
+            const cabinetParts = cabinet.constructionParts;
+            const doorstyle = DoorStyles.findOne({name:listedCabinet.doorStyle});
             cabinet.constructionParts.map((listedPart) => {
                 switch(listedPart.partName) {
                     case 'door':
-                        doorsArray = this.state.doors
                         doorsArray.push({
-                            cabNum:"1",
-                            width: "450",
-                            height: "765",
-                            thickness: "19",
-                            style: "P100",
-                            material: "MDF"})
+                            cabNum: listedCabinet.cabNum,
+                            width: listedCabinet.cabWidth/listedPart.partQty-3,
+                            height: "add logic",
+                            thickness: "add Logic",
+                            style: listedCabinet.doorStyle,
+                            material: "add Logic",
+                            qty: listedPart.partQty})
                         this.setState({
                             doors: doorsArray 
                         })
                         break
                     case 'drawerFront':
                         doorsArray.push({
-                            cabNum:"2",
+                            cabNum:listedCabinet.cabNum,
                             width: "600",
                             height: "765",
                             thickness: "19",
                             style: "P100",
-                            material: "MDF"})
+                            material: "MDF",
+                            qty: listedPart.partQty})
                         this.setState({
                             doors: doorsArray 
                         })
