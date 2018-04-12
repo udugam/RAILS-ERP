@@ -151,7 +151,7 @@ export default class GenerateCutListCSV extends Component {
                         if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
                             listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)-5
                         } else if (listedCabinet.rearCleat===true) {
-                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7-rearCleatThickness;
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7-REARCLEAT;
                         } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
                             listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)-SHELFOFFSET
                             listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-SHELFOFFSET
@@ -246,7 +246,7 @@ export default class GenerateCutListCSV extends Component {
         return (
         <div>
             <Button block bsSize='large' bsStyle="success" onClick={this.populatePartList}>Generate CSV</Button> 
-            <CsvCreator filename='cutlist' noHeader={true} rows={this.state.partList}>
+            <CsvCreator filename={this.props.projectName} noHeader={true} rows={this.state.partList}>
                 <p>Download CSV</p>
             </CsvCreator>
         </div>

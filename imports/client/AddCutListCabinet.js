@@ -111,7 +111,7 @@ export default class AddCutListCabinet extends Component {
             }
         } else {
             this.setState({
-                type: "",
+                type: cabinet.type
             });
         }
 
@@ -230,9 +230,14 @@ export default class AddCutListCabinet extends Component {
                             </FormGroup>
                         </Col>
                         }
+                        {/*Indicate if Larger Shelf Holes are needed for Sleeves and Pins*/}
                          <FormGroup>
                             <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "shelfSleeves")}>Shelf Hole Sleeves</Checkbox>
                         </FormGroup>
+                        {/*Indicate if a Panel exists on either side of Cabinet*/}
+                        <FormGroup>
+                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "panel")}>Adjacent Panel?</Checkbox>
+                            </FormGroup>
                     </Row>
                     <Row>
                         <Col xs={6} md={4}>
@@ -267,12 +272,6 @@ export default class AddCutListCabinet extends Component {
                                     )
                                     })}
                                 </FormControl>
-                            </FormGroup>
-                        </Col>
-                        <Col xs={6} md={4}>
-                            {/*Indicate if a Panel exists on either side of Cabinet*/}
-                            <FormGroup>
-                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "panel")}>Adjacent Panel?</Checkbox>
                             </FormGroup>
                         </Col>
                     </Row>   

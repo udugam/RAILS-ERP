@@ -18,7 +18,10 @@ import {
   Table,
   FormGroup,
   Tabs,
-  Tab
+  Tab,
+  ControlLabel,
+  FormControl,
+  Col
 } from 'React-Bootstrap';
 
 
@@ -29,8 +32,20 @@ class ProductionLists extends Component {
     super(props);
     this.state = {
         cabinets: [],
-        panels:[]
+        panels:[],
+        projectName: ""
     };
+    this.handleInputChange = this.handleInputChange.bind(this)
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    })
   }
 
   addCabinetToList = (cabinetData) => {
@@ -66,6 +81,14 @@ class ProductionLists extends Component {
     return (
       <div>
           <PageHeader>Production-Lists Generator</PageHeader>
+          <Panel>
+            <Col xs={6} md={4}>
+              <FormGroup>
+                <ControlLabel>Project Name</ControlLabel>
+                <FormControl type="text" name="projectName" onChange={this.handleInputChange} />
+              </FormGroup>
+            </Col>
+          </Panel>
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="Cabinets">
               <AddCutListCabinet doorStyles= {this.props.doorStyles} cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList} drawers={this.props.drawers}/>
@@ -74,7 +97,7 @@ class ProductionLists extends Component {
                 <CabinetList cutListCabinets={this.state.cabinets} />
               </Table>
               {/*Generate Cutlist CSV */}
-              <GenerateCutListCSV cutListCabinets={this.state.cabinets} materials={this.props.materials} />
+              <GenerateCutListCSV projectName={this.state.projectName} cutListCabinets={this.state.cabinets} materials={this.props.materials} />
             </Tab>
             <Tab eventKey={2} title="Panels">
               Tab 2 content
