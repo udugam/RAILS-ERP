@@ -108,10 +108,14 @@ export default class AddCutListCabinet extends Component {
                     type: "upperCorner",
                     cabDepth: 305
                 });
+            } else {
+                this.setState({
+                    type: cabinet.type
+                });
             }
         } else {
             this.setState({
-                type: cabinet.type
+                type: ""
             });
         }
 
@@ -213,31 +217,25 @@ export default class AddCutListCabinet extends Component {
                         }
                     </Row>
                     <Row>
-                        <Col xs={6} md={4}>
-                            {/*Select to overide standard Dimensions*/}
-                            <FormGroup>
-                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "overrideDims")}>Override Dimensions</Checkbox>
-                            </FormGroup>
-                        </Col>
-                        {this.state.type==="upper" && 
-                        <Col xs={6} md={4}>
-                            {/*Select to inset backs for rear cleat for hanging*/}
-                            <FormGroup>
-                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "rearCleat")}>Inset Back for Rear Cleat</Checkbox>
-                            </FormGroup>
-                            <FormGroup>
-                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "lineBore")}>Line Bore Shelf Holes</Checkbox>
-                            </FormGroup>
-                        </Col>
-                        }
-                        {/*Indicate if Larger Shelf Holes are needed for Sleeves and Pins*/}
-                         <FormGroup>
-                            <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "shelfSleeves")}>Shelf Hole Sleeves</Checkbox>
-                        </FormGroup>
-                        {/*Indicate if a Panel exists on either side of Cabinet*/}
                         <FormGroup>
-                                <Checkbox inline onClick={e => this.handleCheckboxChange(e.target.checked, "panel")}>Adjacent Panel?</Checkbox>
-                            </FormGroup>
+                            <Col xs={6} md={4}>
+                                {/*Select to overide standard Dimensions*/}
+                                <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "overrideDims")}>Override Dimensions</Checkbox>
+                            </Col>
+                            <Col xs={6} md={4}>
+                                {this.state.type==="upper" && 
+                                    <div>
+                                    {/*Select to inset backs for rear cleat for hanging*/}
+                                        <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "rearCleat")}>Inset Back for Rear Cleat</Checkbox>
+                                        <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "lineBore")}>Line Bore Shelf Holes</Checkbox>
+                                    </div>
+                                }
+                                {/*Indicate if Larger Shelf Holes are needed for Sleeves and Pins*/}
+                                <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "shelfSleeves")}>Shelf Hole Sleeves</Checkbox>
+                                {/*Indicate if a Panel exists on either side of Cabinet*/}
+                                <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "panel")}>Adjacent Panel?</Checkbox>
+                            </Col>
+                        </FormGroup>
                     </Row>
                     <Row>
                         <Col xs={6} md={4}>
