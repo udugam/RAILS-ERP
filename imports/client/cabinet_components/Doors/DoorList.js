@@ -9,6 +9,10 @@ import Cabinets from '../../../api/Cabinets'
 import DoorStyles from '../../../api/DoorStyles'
 import DisplayDoorList from './DisplayDoorList'
 
+const PANEL = 3
+const DOOR = 2
+const COUNTERTOP = 5
+
 export default class DoorList extends Component {
     constructor(props) {
         super(props);
@@ -34,11 +38,30 @@ export default class DoorList extends Component {
             cabinet.constructionParts.map((listedPart) => {
                 switch(listedPart.partName) {
                     case 'door':
+                    let doorWidth = 0
+                    let dootHeight = 0
+                    let doorThickness = 19
+                        if (listedCabinet.type==="base" || listedCabinet.type==="vanity") {
+                            //add if statement for width of blind corner cabinet doors
+                            doorWidth = listedCabinet.panel? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
+                            doorHeight = listedCabinet.cabHeight-COUNTERTOP
+                        } else if (listedCabinet.type==="upper" || listedCabinet.type==="pantry") {
+                            doorWidth = listedCabinet.panel? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
+                            doorHeight = listedCabinet.cabHeight-DOOR
+                        } else if (listedCabinet.type==="baseCorner") {
+                            //const doorWidth =
+                            //const doorWidth2 =  
+                            //const doorHeight = 
+                        } else if (listedCabinet.type==="upperCorner") {
+                            //const doorWidth =
+                            //const doorWidth2 =  
+                            //const doorHeight = 
+                        } 
                         doorsArray.push({
                             cabNum: listedCabinet.cabNum,
-                            width: listedCabinet.cabWidth/listedPart.partQty-3,
-                            height: "add logic",
-                            thickness: "add Logic",
+                            width: doorWidth,
+                            height: doorHeight,
+                            thickness: doorThickness,
                             style: listedCabinet.doorStyle,
                             material: "add Logic",
                             qty: listedPart.partQty})
@@ -47,13 +70,16 @@ export default class DoorList extends Component {
                         })
                         break
                     case 'drawerFront':
+                    let drawerWidth = listedCabinet.panel? listedCabinet.cabWidth-PANEL : listedCabinet.cabWidth-DOOR
+                    let drawerHeight = listedPart.frontHeight
+                    let drawerThickness = 19
                         doorsArray.push({
                             cabNum:listedCabinet.cabNum,
-                            width: "600",
-                            height: "765",
-                            thickness: "19",
-                            style: "P100",
-                            material: "MDF",
+                            width: drawerWidth,
+                            height: drawerHeight,
+                            thickness: drawerThickness,
+                            style: listedCabinet.doorStyle,
+                            material: "add logic",
                             qty: listedPart.partQty})
                         this.setState({
                             doors: doorsArray 

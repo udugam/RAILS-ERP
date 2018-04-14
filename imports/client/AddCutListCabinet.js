@@ -52,11 +52,12 @@ export default class AddCutListCabinet extends Component {
     }
 
     handleAddCabinet() {
+        console.log("here")
+        this.props.addCabinetCallback(this.state)
         const nextCabNum = this.state.cabNum+1
         this.setState({
             cabNum: nextCabNum,
-        });
-        this.props.addCabinetCallback(this.state)
+        })
     }
 
     drawerCheck() {
@@ -197,7 +198,7 @@ export default class AddCutListCabinet extends Component {
                                 </FormGroup>
                             </Col>
                         }
-                        {(this.state.overrideDims || this.state.type==="upper") && 
+                        {((this.state.overrideDims || this.state.type==="upper") && this.state.type!=="pantry") && 
                             <Col xs={6} md={3}>
                                 {/*Input Cabinet Height*/}
                                 <FormGroup>

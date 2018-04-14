@@ -49,8 +49,8 @@ class ProductionLists extends Component {
   }
 
   addCabinetToList = (cabinetData) => {
-    if (cabinetData.cabType==="pantry") {
-
+    if (cabinetData.type==="pantry") {
+      console.log("Here")
       //create two cabinet data sets and assign each the heights defined by the user
       const lowerCabinetData = Object.assign({},cabinetData)
       lowerCabinetData.cabHeight = cabinetData.pantryBaseHeight
