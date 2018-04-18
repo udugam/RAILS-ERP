@@ -5,6 +5,7 @@ import AddCutListCabinet from './AddCutListCabinet';
 import CabinetList from './CabinetList';
 import GenerateCutListCSV from './GenerateCutListCSV';
 import DoorList from './cabinet_components/Doors/DoorList'
+import PanelList from './cabinet_components/Panels/PanelList'
 
 import Cabinets from '../api/Cabinets';
 import Materials from '../api/Materials';
@@ -100,7 +101,8 @@ class ProductionLists extends Component {
               <GenerateCutListCSV projectName={this.state.projectName} cutListCabinets={this.state.cabinets} materials={this.props.materials} />
             </Tab>
             <Tab eventKey={2} title="Panels">
-              Tab 2 content
+              {/*Panel List*/}
+              <PanelList cabinets={this.state.cabinets}/>
             </Tab>
             <Tab eventKey={3} title="Doors">
               {/*Display Door Lists*/}
