@@ -27,7 +27,8 @@ export default class AddCutListCabinet extends Component {
             cabType: "",
             type: "",
             overrideDims: false,
-            panel: false,
+            lpanel: false,
+            rpanel: false,
             rearCleat: false,
             lineBore: false,
             shelfSleeves: false,
@@ -234,7 +235,8 @@ export default class AddCutListCabinet extends Component {
                                 {/*Indicate if Larger Shelf Holes are needed for Sleeves and Pins*/}
                                 <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "shelfSleeves")}>Shelf Hole Sleeves</Checkbox>
                                 {/*Indicate if a Panel exists on either side of Cabinet*/}
-                                <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "panel")}>Adjacent Panel?</Checkbox>
+                                <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "lpanel")}>Left Panel</Checkbox>
+                                <Checkbox onClick={e => this.handleCheckboxChange(e.target.checked, "rpanel")}>Right Panel</Checkbox>
                             </Col>
                         </FormGroup>
                     </Row>

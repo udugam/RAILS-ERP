@@ -17,8 +17,18 @@ export default class DisplayPanelList extends Component {
                             <th>Height (mm)</th>
                             <th>Thickness (mm)</th>
                             <th>Material</th>
-                            <th>Qty</th>
                         </tr>
+                        {this.props.panels.map((panel) => {
+                        return (
+                            <tr>
+                                <td>{panel.cabNum}</td>
+                                <td>{panel.width}</td>
+                                <td>{panel.height}</td>
+                                <td>{panel.thickness}</td>
+                                <td>{panel.material}</td>
+                            </tr>
+                        )
+                    })}
                     </tbody>
                 </Table>
             </div>

@@ -39,14 +39,14 @@ export default class DoorList extends Component {
                 switch(listedPart.partName) {
                     case 'door':
                     let doorWidth = 0
-                    let dootHeight = 0
+                    let doorHeight = 0
                     let doorThickness = 19
                         if (listedCabinet.type==="base" || listedCabinet.type==="vanity") {
                             //add if statement for width of blind corner cabinet doors
-                            doorWidth = listedCabinet.panel? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
+                            doorWidth = (listedCabinet.lpanel || listedCabinet.rpanel) ? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
                             doorHeight = listedCabinet.cabHeight-COUNTERTOP
                         } else if (listedCabinet.type==="upper" || listedCabinet.type==="pantry") {
-                            doorWidth = listedCabinet.panel? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
+                            doorWidth = (listedCabinet.lpanel || listedCabinet.rpanel) ? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
                             doorHeight = listedCabinet.cabHeight-DOOR
                         } else if (listedCabinet.type==="baseCorner") {
                             //const doorWidth =
@@ -70,7 +70,7 @@ export default class DoorList extends Component {
                         })
                         break
                     case 'drawerFront':
-                    let drawerWidth = listedCabinet.panel? listedCabinet.cabWidth-PANEL : listedCabinet.cabWidth-DOOR
+                    let drawerWidth = (listedCabinet.lpanel || listedCabinet.rpanel) ? listedCabinet.cabWidth-PANEL : listedCabinet.cabWidth-DOOR
                     let drawerHeight = listedPart.frontHeight
                     let drawerThickness = 19
                         doorsArray.push({
