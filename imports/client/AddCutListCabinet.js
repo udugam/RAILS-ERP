@@ -26,6 +26,7 @@ export default class AddCutListCabinet extends Component {
             cabMaterial: "",
             cabType: "",
             type: "",
+            blindPanel: false,
             overrideDims: false,
             lpanel: false,
             rpanel: false,
@@ -34,6 +35,9 @@ export default class AddCutListCabinet extends Component {
             shelfSleeves: false,
         }
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.drawerCheck = this.drawerCheck.bind(this)
+        this.cabTypeCheck = this.cabTypeCheck.bind(this)
+        this.blindCheck = this.blindCheck.bind(this)
     }
 
     handleInputChange(event) {
@@ -43,7 +47,7 @@ export default class AddCutListCabinet extends Component {
    
         this.setState({
           [name]: value,
-        }, () => {this.drawerCheck(),this.cabTypeCheck()});
+        }, () => {this.drawerCheck(),this.cabTypeCheck(), this.blindCheck()});
     }
 
     handleCheckboxChange(checked, name) {
@@ -73,6 +77,18 @@ export default class AddCutListCabinet extends Component {
         }    
     }
 
+    blindCheck() {
+        if (Cabinets.findOne({code: this.state.cabCode, "constructionParts.partName": "blindPanel"})) {
+            this.setState({
+                blindPanel: true,
+            });
+        } else {
+            this.setState({
+                blindPanel: false,
+            });
+        }  
+    }
+
     cabTypeCheck() {
         const cabCode = this.state.cabCode
         const cabinet = Cabinets.findOne({code: cabCode})
@@ -88,6 +104,7 @@ export default class AddCutListCabinet extends Component {
                     cabHeight: 770,
                     cabDepth: 600,
                 })
+                
             } else if (cabinet.type==="vanity" && !this.state.overrideDims) {
                 this.setState({
                     type: "vanity",
@@ -99,13 +116,13 @@ export default class AddCutListCabinet extends Component {
                     type: "upper",
                     cabDepth: 305,
                 });
-            } else if (cabinet.type==="baseCorner") {
+            } else if (cabinet.type==="baseCorner" && !this.state.overrideDims) {
                 this.setState({
                     type: "baseCorner",
                     cabHeight: 770,
                     cabDepth: 600
                 });
-            } else if (cabinet.type==="upperCorner") {
+            } else if (cabinet.type==="upperCorner" && !this.state.overrideDims) {
                 this.setState({
                     type: "upperCorner",
                     cabDepth: 305
@@ -214,6 +231,15 @@ export default class AddCutListCabinet extends Component {
                                 <FormGroup>
                                     <ControlLabel>Depth (mm)</ControlLabel>
                                     <FormControl type="number" name="cabDepth" placeholder={this.state.cabDepth} onChange={this.handleInputChange} />
+                                </FormGroup>
+                            </Col>
+                        }
+                        {this.state.blindPanel && 
+                            <Col xs={6} md={3}>
+                            {/*Input Door Opening*/}
+                                <FormGroup>
+                                    <ControlLabel>Cabinet Opening Width for Door(s) (mm)</ControlLabel>
+                                    <FormControl type="number" name="doorSpace" onChange={this.handleInputChange} />
                                 </FormGroup>
                             </Col>
                         }

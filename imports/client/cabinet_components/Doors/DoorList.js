@@ -12,6 +12,11 @@ import DisplayDoorList from './DisplayDoorList'
 const PANEL = 3
 const DOOR = 2
 const COUNTERTOP = 5
+const BUMPER = 3
+const DOORTHICKNESS = 19
+const GABLE_THICKNESS = 19
+const ANGLE_45IIHINGE_OVERLAY = 3.5
+const ANGLE_NEG45IIIHINGE_OVERLAY = 11.2
 
 export default class DoorList extends Component {
     constructor(props) {
@@ -27,63 +32,69 @@ export default class DoorList extends Component {
             this.generateDoors()
         }
     }
-    
 
+    addToDoorList(doorsArray,cabNum,width, height, thickness, style, material, qty) {
+        doorsArray.push({
+            cabNum: cabNum,
+            width: width,
+            height: height,
+            thickness: thickness,
+            style: style,
+            material: material,
+            qty: qty
+        })
+        this.setState({
+            doors: doorsArray 
+        })
+    }
+    
     generateDoors() {
         const doorsArray = []
         this.props.cabinets.map((listedCabinet) => {
             const cabinet = Cabinets.findOne({code:listedCabinet.cabCode});
             const cabinetParts = cabinet.constructionParts;
             const doorstyle = DoorStyles.findOne({name:listedCabinet.doorStyle});
+            const panel = (listedCabinet.lpanel || listedCabinet.rpanel || listedCabinet.blindPanel) ? true : false //variable to determine if panel exists for door width calculations
             cabinet.constructionParts.map((listedPart) => {
                 switch(listedPart.partName) {
                     case 'door':
-                    let doorWidth = 0
+                    let doorWidth = 0 
+                    let doorWidth2 = 0 //variable for corner pie-cuts with bi-fold doors only
                     let doorHeight = 0
                     let doorThickness = 19
+                    let doorCalcWidth = (listedCabinet.blindPanel? listedCabinet.doorSpace : listedCabinet.cabWidth) //This variable is assigned either the cabinet width or space for doors if a blind panel exists
                         if (listedCabinet.type==="base" || listedCabinet.type==="vanity") {
-                            //add if statement for width of blind corner cabinet doors
-                            doorWidth = (listedCabinet.lpanel || listedCabinet.rpanel) ? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
+                            if (listedCabinet.cabCode==="BER" || listedCabinet.cabCode==="BEL") {
+                                doorWidth = Math.floor((Math.SQRT2*listedCabinet.cabWidth)-(Math.SQRT2*GABLE_THICKNESS-ANGLE_45IIHINGE_OVERLAY))
+                            } else {
+                                doorWidth = panel ? Math.ceil(doorCalcWidth/listedPart.partQty-PANEL) : Math.floor(doorCalcWidth/listedPart.partQty-DOOR)
+                            }
                             doorHeight = listedCabinet.cabHeight-COUNTERTOP
                         } else if (listedCabinet.type==="upper" || listedCabinet.type==="pantry") {
-                            doorWidth = (listedCabinet.lpanel || listedCabinet.rpanel) ? listedCabinet.cabWidth/listedPart.partQty-PANEL : listedCabinet.cabWidth/listedPart.partQty-DOOR
+                            if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
+                                doorWidth = Math.floor((Math.SQRT2*listedCabinet.cabWidth)-(Math.SQRT2*GABLE_THICKNESS-ANGLE_NEG45IIIHINGE_OVERLAY))
+                            } else {
+                                doorWidth = panel ? Math.ceil(doorCalcWidth/listedPart.partQty-PANEL) : Math.floor(doorCalcWidth/listedPart.partQty-DOOR)
+                            }
                             doorHeight = listedCabinet.cabHeight-DOOR
                         } else if (listedCabinet.type==="baseCorner") {
-                            //const doorWidth =
-                            //const doorWidth2 =  
-                            //const doorHeight = 
+                            doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
+                            doorWidth2 = Math.floor(listedCabinet.cabWidth2-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1) 
+                            doorHeight = listedCabinet.cabHeight-COUNTERTOP
+                            this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                         } else if (listedCabinet.type==="upperCorner") {
-                            //const doorWidth =
-                            //const doorWidth2 =  
-                            //const doorHeight = 
+                            doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
+                            doorWidth2 = Math.floor(listedCabinet.cabWidth2-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1) 
+                            doorHeight = listedCabinet.cabHeight-DOOR
+                            this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                         } 
-                        doorsArray.push({
-                            cabNum: listedCabinet.cabNum,
-                            width: doorWidth,
-                            height: doorHeight,
-                            thickness: doorThickness,
-                            style: listedCabinet.doorStyle,
-                            material: "add Logic",
-                            qty: listedPart.partQty})
-                        this.setState({
-                            doors: doorsArray 
-                        })
+                        this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                         break
                     case 'drawerFront':
-                    let drawerWidth = (listedCabinet.lpanel || listedCabinet.rpanel) ? listedCabinet.cabWidth-PANEL : listedCabinet.cabWidth-DOOR
+                    let drawerWidth = panel ? Math.ceil(listedCabinet.cabWidth-PANEL) : Math.floor(listedCabinet.cabWidth-DOOR)
                     let drawerHeight = listedPart.frontHeight
                     let drawerThickness = 19
-                        doorsArray.push({
-                            cabNum:listedCabinet.cabNum,
-                            width: drawerWidth,
-                            height: drawerHeight,
-                            thickness: drawerThickness,
-                            style: listedCabinet.doorStyle,
-                            material: "add logic",
-                            qty: listedPart.partQty})
-                        this.setState({
-                            doors: doorsArray 
-                        })
+                    this.addToDoorList(doorsArray,listedCabinet.cabNum,drawerWidth,drawerHeight,drawerThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                         break
                     default:
                 }

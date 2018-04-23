@@ -55,6 +55,9 @@ export default class GenerateCutListCSV extends Component {
                             const newProgramPath = slicedProgramPath+"-7.5mm"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
                         }
+                        if (listedCabinet.cabCode==="BEL") {
+                            listedPart.partWidth = listedPart.partWidth-listedCabinet.cabWidth+parseInt(listedPart.partThickness)
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
                     case 'rGable':
@@ -83,6 +86,9 @@ export default class GenerateCutListCSV extends Component {
                             const newProgramPath = slicedProgramPath+"-7.5mm"+".pgmx"
                             listedPart.partProgramPath = newProgramPath
                         }
+                        if (listedCabinet.cabCode==="BER") {
+                            listedPart.partWidth = listedPart.partWidth-listedCabinet.cabWidth+parseInt(listedPart.partThickness)
+                        }
                         this.updateCSV(listedPart,listedCabinet.cabNum)
                         break
                     case 'stretcher':
@@ -101,6 +107,8 @@ export default class GenerateCutListCSV extends Component {
                         } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
                             listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)
                             listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
+                        } else if (listedCabinet.cabCode==="BER" || listedCabinet.cabCode==="BEL") {
+                            listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness
                         }
@@ -116,6 +124,8 @@ export default class GenerateCutListCSV extends Component {
                         } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
                             listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)
                             listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)
+                        } else if (listedCabinet.cabCode==="BER" || listedCabinet.cabCode==="BEL") {
+                            listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)
                         } else {
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness
                         }
@@ -147,16 +157,18 @@ export default class GenerateCutListCSV extends Component {
                         break
                     case 'shelf':
                         listedPart.partThickness = material.thickness;
-                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-5;
+                        listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-SHELFDEDUCTION;
                         if (listedCabinet.type==="upperCorner" || listedCabinet.type==="baseCorner") {
-                            listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)-5
+                            listedPart.partWidth = listedCabinet.cabWidth2-(2*material.thickness)-SHELFDEDUCTION
                         } else if (listedCabinet.rearCleat===true) {
-                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7-REARCLEAT;
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-SHELFOFFSET-REARCLEAT;
                         } else if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
                             listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)-SHELFOFFSET
                             listedPart.partLength = listedCabinet.cabWidth-(2*material.thickness)-SHELFOFFSET
+                        } else if (listedCabinet.cabCode==="BER" || listedCabinet.cabCode==="BEL") {
+                            listedPart.partWidth = listedCabinet.cabDepth-(2*material.thickness)-SHELFOFFSET
                         } else {
-                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-7;
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness-SHELFOFFSET;
                         }
 
                         //Shelf Quantity Calculation
