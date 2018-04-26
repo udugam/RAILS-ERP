@@ -23,6 +23,7 @@ import MainLayout from './layouts/MainLayout';
 import NewProject from './NewProject';
 import CabinetDatabase from './CabinetDatabase';
 import ProductionLists from './ProductionLists';
+import ViewProjects from './project_components/ViewProjects'
 
 Meteor.startup(() => {
   render(
@@ -41,7 +42,8 @@ Meteor.startup(() => {
         <Route path="/addAccessory" component={NewAccessory}/>
         <Route path="/addMillworkItem" component={NewMillworkItem}/>
         <Route path="/cabinetDatabase" component={CabinetDatabase}/>
-        <Route path="/productionLists" component={ProductionLists} />
+        <Route path="/createProject" component={ProductionLists} />
+        <Route path="/viewProjects" component={ViewProjects} />
         <Route path="/:id" component={QuotePage}/>
       </Route>
     </Router>,

@@ -4,6 +4,7 @@ import { LoginButtons } from 'meteor/okgrow:accounts-ui-react';
 import IsRole from '../utilities/IsRole';
 import { createContainer } from 'meteor/react-meteor-data';
 import DatabaseLinks from './DatabaseLinks';
+import ProductionLinks from './ProductionLinks'
 import {  Navbar,
           Nav,
           NavDropdown,
@@ -26,7 +27,9 @@ const MainLayout = (props) =>
       <Nav>
         <NavItem><Link to='/newProject'>Create New Project</Link></NavItem>
         <NavItem><Link to='/myQuotes'>My Quotes</Link></NavItem>
-        <NavItem><Link to='/productionLists'>Production Lists</Link></NavItem>
+        <NavDropdown eventKey={2} title="Production" id="basic-nav-dropdown">
+          <ProductionLinks></ProductionLinks>
+        </NavDropdown>
         <NavDropdown eventKey={3} title="Database" id="basic-nav-dropdown">
           <DatabaseLinks></DatabaseLinks>
         </NavDropdown>

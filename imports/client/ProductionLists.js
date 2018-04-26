@@ -11,6 +11,7 @@ import Cabinets from '../api/Cabinets';
 import Materials from '../api/Materials';
 import Drawers from '../api/Drawers'
 import DoorStyles from '../api/DoorStyles'
+import Projects from '../api/Projects'
 
 import {
   PageHeader, 
@@ -34,9 +35,11 @@ class ProductionLists extends Component {
     this.state = {
         cabinets: [],
         panels:[],
+        doors:[],
         projectName: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.createProject = this.createProject.bind(this)
   }
 
   handleInputChange(event) {
@@ -47,6 +50,18 @@ class ProductionLists extends Component {
     this.setState({
       [name]: value,
     })
+  }
+
+  createProject(event) {
+    event.preventDefault();
+    const projectName = this.state.projectName
+    const cabinets = this.state.cabinets
+    const panels = this.state.panels
+    const doors = this.state.doors
+
+    if (projectName != '') {
+      Meteor.call('insertNewProject',projectName,cabinets,panels,doors);
+    }
   }
 
   addCabinetToList = (cabinetData) => {
@@ -88,6 +103,9 @@ class ProductionLists extends Component {
                 <ControlLabel>Project Name</ControlLabel>
                 <FormControl type="text" name="projectName" onChange={this.handleInputChange} />
               </FormGroup>
+            </Col>
+            <Col xs={6} md={4}>
+            <Button block bsSize='large' onClick={this.createProject}>Save Project</Button>
             </Col>
           </Panel>
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
