@@ -26,6 +26,7 @@ export default class AddCutListCabinet extends Component {
             cabMaterial: "",
             cabType: "",
             type: "",
+            drawerType: "none",
             blindPanel: false,
             overrideDims: false,
             lpanel: false,
@@ -175,7 +176,7 @@ export default class AddCutListCabinet extends Component {
                                 <FormGroup>
                                     <ControlLabel>Drawer Type</ControlLabel>
                                     <FormControl componentClass="select" name="drawerType" onChange={this.handleInputChange}>
-                                        <option>...</option>
+                                        <option value="none">...</option>
                                         {this.props.drawers.map((storedDrawer) => {
                                             return (
                                                 <option value={storedDrawer.model} key={storedDrawer.model}>

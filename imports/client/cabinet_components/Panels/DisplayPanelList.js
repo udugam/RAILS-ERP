@@ -13,8 +13,8 @@ export default class DisplayPanelList extends Component {
                     <tbody>
                         <tr>
                             <th>Cabinet Number</th>
-                            <th>Width (mm)</th>
                             <th>Height (mm)</th>
+                            <th>Width (mm)</th>
                             <th>Thickness (mm)</th>
                             <th>Material</th>
                         </tr>
@@ -22,8 +22,8 @@ export default class DisplayPanelList extends Component {
                         return (
                             <tr>
                                 <td>{panel.cabNum}</td>
-                                <td>{panel.width}</td>
                                 <td>{panel.height}</td>
+                                <td>{panel.width}</td>
                                 <td>{panel.thickness}</td>
                                 <td>{panel.material}</td>
                             </tr>

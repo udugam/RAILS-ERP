@@ -34,7 +34,7 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabDepth-listedPart.partThickness;
                         if (listedCabinet.drawer===true) {
-                            listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+"-"+listedCabinet.drawerType+".pgmx"
+                            listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+( (listedCabinet.drawerType!="none") ? "-"+listedCabinet.drawerType+".pgmx" : ".pgmx")
                         }
                         if (listedCabinet.rearCleat===true) {
                             const originalProgramPath = listedPart.partProgramPath
@@ -65,7 +65,7 @@ export default class GenerateCutListCSV extends Component {
                         listedPart.partLength = listedCabinet.cabHeight;
                         listedPart.partWidth = listedCabinet.cabDepth-listedPart.partThickness;
                         if (listedCabinet.drawer===true) {
-                            listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+"-"+listedCabinet.drawerType+".pgmx"
+                            listedPart.partProgramPath = listedPart.partProgramPath+listedCabinet.cabCode+"-"+listedPart.partName+( (listedCabinet.drawerType!="none") ? "-"+listedCabinet.drawerType+".pgmx" : ".pgmx")
                         }
                         if (listedCabinet.rearCleat===true) {
                             const originalProgramPath = listedPart.partProgramPath

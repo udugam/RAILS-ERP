@@ -17,6 +17,7 @@ const DOORTHICKNESS = 19
 const GABLE_THICKNESS = 19
 const ANGLE_45IIHINGE_OVERLAY = 3.5
 const ANGLE_NEG45IIIHINGE_OVERLAY = 11.2
+const DRW_SPACING = 3
 
 export default class DoorList extends Component {
     constructor(props) {
@@ -69,7 +70,7 @@ export default class DoorList extends Component {
                             } else {
                                 doorWidth = panel ? Math.ceil(doorCalcWidth/listedPart.partQty-PANEL) : Math.floor(doorCalcWidth/listedPart.partQty-DOOR)
                             }
-                            doorHeight = listedCabinet.cabHeight-COUNTERTOP
+                            doorHeight = listedCabinet.cabHeight-COUNTERTOP //Need to add condition for door height calc when drawer is present.
                         } else if (listedCabinet.type==="upper" || listedCabinet.type==="pantry") {
                             if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
                                 doorWidth = Math.floor((Math.SQRT2*listedCabinet.cabWidth)-(Math.SQRT2*GABLE_THICKNESS-ANGLE_NEG45IIIHINGE_OVERLAY))

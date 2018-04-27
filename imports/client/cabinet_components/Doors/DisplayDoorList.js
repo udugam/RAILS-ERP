@@ -15,8 +15,8 @@ export default class DisplayDoorList extends Component {
                  <tbody>
                     <tr>
                         <th>Cabinet Number</th>
-                        <th>Width (mm)</th>
                         <th>Height (mm)</th>
+                        <th>Width (mm)</th>
                         <th>Thickness (mm)</th>
                         <th>Door Style</th>
                         <th>Material</th>
@@ -26,8 +26,8 @@ export default class DisplayDoorList extends Component {
                         return (
                             <tr>
                                 <td>{door.cabNum}</td>
-                                <td>{door.width}</td>
                                 <td>{door.height}</td>
+                                <td>{door.width}</td>
                                 <td>{door.thickness}</td>
                                 <td>{door.style}</td>
                                 <td>{door.material}</td>
