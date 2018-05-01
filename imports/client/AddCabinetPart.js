@@ -58,6 +58,7 @@ export default class AddCabinetPart extends Component {
                                     <option value="drawerFront">Drawer Front</option>
                                     <option value="door">Door</option>
                                     <option value="blindPanel">Blind Panel</option>
+                                    <option value="divider">Divider</option>
                                 </FormControl>
                             </FormGroup>
                         </Col>

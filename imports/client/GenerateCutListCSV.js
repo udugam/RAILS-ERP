@@ -11,6 +11,7 @@ const REARCLEAT = 19
 const MWSHELFDEPTH = 485
 const SHELFDEDUCTION = 5
 const SHELFOFFSET = 7
+const COUNTERTOP = 5
 
 export default class GenerateCutListCSV extends Component {
     constructor(props) {
@@ -56,7 +57,7 @@ export default class GenerateCutListCSV extends Component {
                             listedPart.partProgramPath = newProgramPath
                         }
                         if (listedCabinet.cabCode==="BEL") {
-                            listedPart.partWidth = listedPart.partWidth-listedCabinet.cabWidth+parseInt(listedPart.partThickness)
+                            listedPart.partWidth = listedPart.partWidth-listedCabinet.cabWidth+Number(listedPart.partThickness)
                         }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
@@ -210,7 +211,7 @@ export default class GenerateCutListCSV extends Component {
                     case 'drawerFront':
                         //if metal drawer, then create file name for metal drawer pieces
                         //if wood drawer, then create file name for wood drawer pieces
-                        break
+                        break;
                     case 'blindPanel':
                         listedPart.partThickness = material.thickness
                         listedPart.partLength = listedCabinet.cabHeight
@@ -220,6 +221,22 @@ export default class GenerateCutListCSV extends Component {
                         } else if (listedCabinet.type==="base") {
                             listedPart.partWidth = 560
                             listedPart.partLength = listedCabinet.cabHeight
+                        }
+                        this.updateCSV(listedPart,listedCabinet.cabNum);
+                        break;
+                    case 'divider':
+                        listedPart.partThickness = material.thickness
+                        let cabCode = listedCabinet.cabCode
+                        if (cabCode.includes("T")) {
+                            cabinetParts.map((part)=> {
+                                if (part.partName==="drawerFront") {
+                                    listedPart.partLength = Number(part.frontHeight)+COUNTERTOP-(2*Number(material.thickness))
+                                    listedPart.partWidth = listedCabinet.cabDepth-material.thickness
+                                }
+                            })
+                        } else {
+                            listedPart.partLength = listedCabinet.cabHeight-2*material.thickness
+                            listedPart.partWidth = listedCabinet.cabDepth-material.thickness
                         }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
