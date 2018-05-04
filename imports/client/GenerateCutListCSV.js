@@ -234,6 +234,7 @@ export default class GenerateCutListCSV extends Component {
                                     listedPart.partWidth = listedCabinet.cabDepth-material.thickness
                                 }
                             })
+
                         } else {
                             listedPart.partLength = listedCabinet.cabHeight-2*material.thickness
                             listedPart.partWidth = listedCabinet.cabDepth-material.thickness

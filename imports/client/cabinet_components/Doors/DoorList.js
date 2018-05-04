@@ -82,12 +82,18 @@ export default class DoorList extends Component {
                             doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
                             doorWidth2 = Math.floor(listedCabinet.cabWidth2-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1) 
                             doorHeight = listedCabinet.cabHeight-COUNTERTOP
-                            this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                            if (doorWidth !== doorWidth2) {
+                                listedPart.partQty = 1
+                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                            }
                         } else if (listedCabinet.type==="upperCorner") {
                             doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
                             doorWidth2 = Math.floor(listedCabinet.cabWidth2-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1) 
                             doorHeight = listedCabinet.cabHeight-DOOR
-                            this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                            if (doorWidth !== doorWidth2) {
+                                listedPart.partQty = 1
+                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                            }
                         } 
                         this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                         break
