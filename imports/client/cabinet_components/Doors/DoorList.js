@@ -8,6 +8,7 @@ import {
 import Cabinets from '../../../api/Cabinets'
 import DoorStyles from '../../../api/DoorStyles'
 import DisplayDoorList from './DisplayDoorList'
+import CsvCreator from 'react-csv-creator';
 
 const PANEL = 3
 const DOOR = 2
@@ -23,9 +24,11 @@ export default class DoorList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            doors:[]
+            doors:[],
+            csvDoorList:[]
         }
         this.generateDoors()
+        this.generateCSV = this.generateCSV.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -109,10 +112,42 @@ export default class DoorList extends Component {
         })
     }
 
+
+    generateCSV() {
+        doorsArray = this.state.doors
+        doorsArray.map((listedDoor)=> {
+            let listedCSVDoor = [
+                listedDoor.cabNum,
+                '',
+                '',
+                listedDoor.qty,
+                '0',
+                listedDoor.height,
+                listedDoor.width,
+                listedDoor.thickness,
+                '',
+                '0',
+                'insert program path to doorstyle',
+            ]
+
+            csvDoorList = this.state.csvDoorList;
+            index = csvDoorList.length;
+            csvDoorList[index] = listedCSVDoor;
+            
+            this.setState({
+                csvDoorList: csvDoorList
+            });
+        })
+    }
+
     render() {
         return (
         <Panel>
-            <DisplayDoorList doors={this.state.doors}/> 
+            <DisplayDoorList doors={this.state.doors}/>
+            <Button block bsSize='large' bsStyle="success" onClick={this.generateCSV}>Generate CSV</Button> 
+            <CsvCreator filename={this.props.projectName+'-Doors'} noHeader={true} rows={this.state.csvDoorList}>
+                <p>Download CSV</p>
+            </CsvCreator>
         </Panel>
         )
     }

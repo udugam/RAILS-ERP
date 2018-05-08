@@ -124,7 +124,7 @@ class ProductionLists extends Component {
             </Tab>
             <Tab eventKey={3} title="Doors">
               {/*Display Door Lists*/}
-              <DoorList cabinets={this.state.cabinets} />
+              <DoorList cabinets={this.state.cabinets} projectName={this.state.projectName}/>
             </Tab>
           </Tabs>
       </div>

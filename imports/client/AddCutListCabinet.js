@@ -210,18 +210,15 @@ export default class AddCutListCabinet extends Component {
                         </Col>
                         {(this.state.type==="baseCorner" || this.state.type==="upperCorner") && 
                             <Col xs={6} md={4}>
-                                {/*Input Second Cabinet Width for corner cabinets*/}
                                 <FormGroup>
+                                    {/*Input Second Cabinet Width for corner cabinets*/}
                                     <ControlLabel>Width 2</ControlLabel>
                                     <FormControl type="number" name="cabWidth2" onChange={this.handleInputChange} />
+                                
+                                    {/*Input Cabinet Height*/}
+                                    <ControlLabel>Height (mm)</ControlLabel>
+                                    <FormControl type="number" name="cabHeight" placeholder={this.state.cabHeight} onChange={this.handleInputChange} />
                                 </FormGroup>
-                            </Col>
-                            <Col xs={6} md={3}>
-                            {/*Input Cabinet Height*/}
-                            <FormGroup>
-                                <ControlLabel>Height (mm)</ControlLabel>
-                                <FormControl type="number" name="cabHeight" placeholder={this.state.cabHeight} onChange={this.handleInputChange} />
-                            </FormGroup>
                             </Col>
                         }
                         {((this.state.overrideDims || this.state.type==="upper") && this.state.type!=="pantry") && 
