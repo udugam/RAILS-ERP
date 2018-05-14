@@ -12,6 +12,7 @@ const MWSHELFDEPTH = 485
 const SHELFDEDUCTION = 5
 const SHELFOFFSET = 7
 const COUNTERTOP = 5
+const SHELF_SPECING = 285
 
 export default class GenerateCutListCSV extends Component {
     constructor(props) {
@@ -176,7 +177,7 @@ export default class GenerateCutListCSV extends Component {
                         if (listedCabinet.type==="base" || listedCabinet.type==="baseCorner") {
                             listedPart.partQty = 1
                         } else {
-                            listedPart.partQty = Math.round(listedCabinet.cabHeight/250)-1
+                            listedPart.partQty = Math.round(listedCabinet.cabHeight/SHELF_SPACING)-1
                         }
                         this.updateCSV(listedPart,listedCabinet.cabNum);
                         break;
