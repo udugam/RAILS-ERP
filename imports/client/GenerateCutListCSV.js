@@ -12,7 +12,7 @@ const MWSHELFDEPTH = 485
 const SHELFDEDUCTION = 5
 const SHELFOFFSET = 7
 const COUNTERTOP = 5
-const SHELF_SPECING = 285
+const SHELF_SPACING = 285
 
 export default class GenerateCutListCSV extends Component {
     constructor(props) {
