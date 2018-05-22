@@ -74,7 +74,7 @@ export default class DoorList extends Component {
                                 doorWidth = panel ? Math.ceil(doorCalcWidth/listedPart.partQty-PANEL) : Math.floor(doorCalcWidth/listedPart.partQty-DOOR)
                             }
                             doorHeight = listedCabinet.cabHeight-COUNTERTOP //Need to add condition for door height calc when drawer is present.
-                        } else if (listedCabinet.type==="upper" || listedCabinet.type==="pantry") {
+                        } else if (listedCabinet.type==="upper") {
                             if (listedCabinet.cabCode==="WER" || listedCabinet.cabCode==="WEL") {
                                 doorWidth = Math.floor((Math.SQRT2*listedCabinet.cabWidth)-(Math.SQRT2*GABLE_THICKNESS-ANGLE_NEG45IIIHINGE_OVERLAY))
                             } else {
@@ -97,7 +97,11 @@ export default class DoorList extends Component {
                                 listedPart.partQty = 1
                                 this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                             }
-                        } 
+                        } else if (listedCabinet.type==="pantry") {
+                            listedPart.partQty = listedPart.partQty/2
+                            doorWidth = panel ? Math.ceil(doorCalcWidth/listedPart.partQty-PANEL) : Math.floor(doorCalcWidth/listedPart.partQty-DOOR)
+                            doorHeight = listedCabinet.cabHeight-DOOR
+                        }
                         this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
                         break
                     case 'drawerFront':
