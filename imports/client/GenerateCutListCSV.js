@@ -277,7 +277,7 @@ export default class GenerateCutListCSV extends Component {
         return (
         <div>
             <Button block bsSize='large' bsStyle="success" onClick={this.populatePartList}>Generate CSV</Button> 
-            <CsvCreator filename={this.props.projectName} noHeader={true} rows={this.state.partList}>
+            <CsvCreator filename={this.props.projectName+'-Cabinets'} noHeader={true} rows={this.state.partList}>
                 <p>Download CSV</p>
             </CsvCreator>
         </div>

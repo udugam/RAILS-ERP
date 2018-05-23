@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import DoorStyles from '../api/DoorStyles';
-import {PageHeader, Button, Panel, Table} from 'React-Bootstrap';
+import {PageHeader, Button, Panel, Table, Col, FormGroup, FormControl, ControlLabel} from 'React-Bootstrap';
 
 class NewDoorStyle extends Component {
 
@@ -9,21 +9,35 @@ class NewDoorStyle extends Component {
     super(props);
     this.state = {
       open: false,
+      supplier: "",
+      programPath: "",
     };
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+}
 
   addDoorStyle(event) {
     event.preventDefault();
     const doorName = this.refs.doorName.value.trim();
-    const supplier = this.refs.supplier.value.trim();
+    const supplier = this.state.supplier;
     const itemCost = this.refs.itemCost.value.trim();
     const sqftOak = this.refs.sqftOak.value.trim();
     const sqftMaple = this.refs.sqftMaple.value.trim();
     const sqftCherry = this.refs.sqftCherry.value.trim();
     const sqftMDF = this.refs.sqftMDF.value.trim();
+    const programPath = this.state.programPath;
 
     if (doorName != '') {
-      Meteor.call('insertNewDoorStyle',doorName,supplier,itemCost,sqftOak,sqftMaple,sqftCherry,sqftMDF);
+      Meteor.call('insertNewDoorStyle',doorName,supplier,itemCost,sqftOak,sqftMaple,sqftCherry,sqftMDF,programPath);
       this.refs.doorName.value = '';
       this.refs.supplier.value = '';
     }
@@ -46,13 +60,29 @@ class NewDoorStyle extends Component {
               </div>
             </div>
 
-            {/*2. Input Supplier Name */}
+            {/*2. Select Supplier*/}
             <div className='form-group'>
-              <label className='col-sm-2 control-label'>Supplier</label>
-              <div className='col-sm-4'>
-                <input type='text' className='form-control' ref='supplier'/>
-              </div>
+            <label className='col-sm-2 control-label'>Supplier</label>
+            <div className='col-sm-4'>
+              <select className='form-control' name="supplier" onChange={this.handleInputChange}>
+                <option value="false"> ... </option>
+                <option value='pureKitchens'> Pure Kitchens </option>
+                <option value='redOak'> Red Oak </option>
+                <option value='smCabinets'> SM Cabinets </option>
+                <option value='thermoform'> Thermoform </option>
+              </select>
             </div>
+          </div>
+
+          {this.state.supplier==="pureKitchens" && 
+            <Col xs={6} md={4}>
+              <FormGroup>
+                  {/*Input Program Path for Doors that Pure Kitchens makes*/}
+                  <ControlLabel>Program Path</ControlLabel>
+                  <FormControl type="text" name="programPath" onChange={this.handleInputChange} />
+              </FormGroup>
+            </Col>
+          }
 
             {/*3. Input Setup Cost Per One Door */}
             <div className='form-group'>

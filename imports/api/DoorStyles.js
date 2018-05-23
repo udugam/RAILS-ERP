@@ -8,7 +8,7 @@ if (Meteor.isServer) {
     });
 
   Meteor.methods( {
-    insertNewDoorStyle(doorName,supplier,itemCost,sqftOak,sqftMaple,sqftCherry,sqftMDF) {
+    insertNewDoorStyle(doorName,supplier,itemCost,sqftOak,sqftMaple,sqftCherry,sqftMDF, programPath) {
       if(Meteor.userId()) {
         DoorStyles.insert({
           name: doorName,
@@ -18,6 +18,7 @@ if (Meteor.isServer) {
           sqftMaple: sqftMaple,
           sqftCherry: sqftCherry,
           sqftMDF:  sqftMDF,
+          programPath: programPath
         });
       }
     }

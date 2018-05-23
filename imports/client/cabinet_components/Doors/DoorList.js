@@ -37,7 +37,7 @@ export default class DoorList extends Component {
         }
     }
 
-    addToDoorList(doorsArray,cabNum,width, height, thickness, style, material, qty) {
+    addToDoorList(doorsArray,cabNum,width, height, thickness, style, material, qty, programPath) {
         doorsArray.push({
             cabNum: cabNum,
             width: width,
@@ -45,7 +45,8 @@ export default class DoorList extends Component {
             thickness: thickness,
             style: style,
             material: material,
-            qty: qty
+            qty: qty,
+            programPath: programPath
         })
         this.setState({
             doors: doorsArray 
@@ -87,7 +88,7 @@ export default class DoorList extends Component {
                             doorHeight = listedCabinet.cabHeight-COUNTERTOP
                             if (doorWidth !== doorWidth2) {
                                 listedPart.partQty = 1
-                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
                             }
                         } else if (listedCabinet.type==="upperCorner") {
                             doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
@@ -95,20 +96,20 @@ export default class DoorList extends Component {
                             doorHeight = listedCabinet.cabHeight-DOOR
                             if (doorWidth !== doorWidth2) {
                                 listedPart.partQty = 1
-                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
                             }
                         } else if (listedCabinet.type==="pantry") {
                             listedPart.partQty = listedPart.partQty/2
                             doorWidth = panel ? Math.ceil(doorCalcWidth/listedPart.partQty-PANEL) : Math.floor(doorCalcWidth/listedPart.partQty-DOOR)
                             doorHeight = listedCabinet.cabHeight-DOOR
                         }
-                        this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                        this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
                         break
                     case 'drawerFront':
                     let drawerWidth = panel ? Math.ceil(listedCabinet.cabWidth-PANEL) : Math.floor(listedCabinet.cabWidth-DOOR)
                     let drawerHeight = listedPart.frontHeight
                     let drawerThickness = 19
-                    this.addToDoorList(doorsArray,listedCabinet.cabNum,drawerWidth,drawerHeight,drawerThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty)
+                    this.addToDoorList(doorsArray,listedCabinet.cabNum,drawerWidth,drawerHeight,drawerThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
                         break
                     default:
                 }
@@ -131,7 +132,7 @@ export default class DoorList extends Component {
                 listedDoor.thickness,
                 '',
                 '0',
-                'insert program path to doorstyle',
+                listedDoor.programPath,
             ]
 
             csvDoorList = this.state.csvDoorList;
