@@ -39,6 +39,8 @@ export default class AddCutListCabinet extends Component {
         this.drawerCheck = this.drawerCheck.bind(this)
         this.cabTypeCheck = this.cabTypeCheck.bind(this)
         this.blindCheck = this.blindCheck.bind(this)
+        this.increaseCabNum = this.increaseCabNum.bind(this)
+        this.decreaseCabNum = this.decreaseCabNum.bind(this)
     }
 
     handleInputChange(event) {
@@ -58,11 +60,24 @@ export default class AddCutListCabinet extends Component {
     }
 
     handleAddCabinet() {
-        console.log("here")
         this.props.addCabinetCallback(this.state)
-        const nextCabNum = this.state.cabNum+1
+        const nextCabNum = Number(this.state.cabNum)+1
         this.setState({
             cabNum: nextCabNum,
+        })
+    }
+
+    increaseCabNum() {
+        const newCabNum = Number(this.state.cabNum)+1
+        this.setState({
+            cabNum: newCabNum,
+        })
+    }
+
+    decreaseCabNum() {
+        const newCabNum = Number(this.state.cabNum)-1
+        this.setState({
+            cabNum: newCabNum,
         })
     }
 
@@ -150,7 +165,19 @@ export default class AddCutListCabinet extends Component {
                             {/*Input Cabinet Number*/}
                             <FormGroup>
                                 <ControlLabel>Cabinet Number</ControlLabel>
-                                <FormControl type="number" name="cabNum" placeholder={this.state.cabNum} onChange={this.handleInputChange} />
+                                <Row>
+                                    <Col md={6}>
+                                    <h1 className='text-center'>{this.state.cabNum}</h1>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Row>
+                                            <Button onClick={this.increaseCabNum}>Up</Button>
+                                        </Row>
+                                        <Row>
+                                            <Button onClick={this.decreaseCabNum}>Down</Button>
+                                        </Row>
+                                    </Col>
+                                </Row>
                             </FormGroup>
                         </Col>
                         <Col xs={6} md={3}>
