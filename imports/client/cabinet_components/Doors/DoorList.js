@@ -91,12 +91,18 @@ export default class DoorList extends Component {
                                 this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
                             }
                         } else if (listedCabinet.type==="upperCorner") {
-                            doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
-                            doorWidth2 = Math.floor(listedCabinet.cabWidth2-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1) 
-                            doorHeight = listedCabinet.cabHeight-DOOR
-                            if (doorWidth !== doorWidth2) {
-                                listedPart.partQty = 1
-                                this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
+                            if(listedCabinet.cabCode==="WAL" || listedCabinet.cabCode==="WAR"){
+                                doorWidth = Math.floor(Math.sqrt( Math.pow(listedCabinet.cabWidth,2)+Math.pow(listedCabinet.cabWidth2,2)+(2*Math.pow(listedCabinet.cabDepth,2))+
+                                (2*Math.pow(GABLE_THICKNESS,2))+(4*GABLE_THICKNESS*listedCabinet.cabDepth)-(2*listedCabinet.cabWidth2*listedCabinet.cabDepth)-
+                                (2*listedCabinet.cabWidth2*GABLE_THICKNESS)-(2*listedCabinet.cabWidth*listedCabinet.cabDepth)-(2*listedCabinet.cabWidth*GABLE_THICKNESS) ) )
+                            } else {
+                                doorWidth = Math.floor(listedCabinet.cabWidth-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1)
+                                doorWidth2 = Math.floor(listedCabinet.cabWidth2-listedCabinet.cabDepth-DOORTHICKNESS-BUMPER-1) 
+                                doorHeight = listedCabinet.cabHeight-DOOR
+                                if (doorWidth !== doorWidth2) {
+                                    listedPart.partQty = 1
+                                    this.addToDoorList(doorsArray,listedCabinet.cabNum,doorWidth2,doorHeight,doorThickness,listedCabinet.doorStyle,"add material logic",listedPart.partQty, doorstyle.programPath)
+                                }
                             }
                         } else if (listedCabinet.type==="pantry") {
                             listedPart.partQty = listedPart.partQty/2
