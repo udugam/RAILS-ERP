@@ -3,6 +3,7 @@ import {
     Table,
     Button
 } from 'React-Bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class CabinetList extends Component {
     render() {
@@ -17,6 +18,7 @@ export default class CabinetList extends Component {
                         <th>Width (mm)</th>
                         <th>Depth (mm)</th>
                         <th>Material</th>
+                        <th></th>
                     </tr>
                     {this.props.cutListCabinets.map((cabinet) => {
                         return (
@@ -27,6 +29,7 @@ export default class CabinetList extends Component {
                                 <td>{cabinet.cabWidth}</td>
                                 <td>{(cabinet.type==="baseCorner" || cabinet.type==="upperCorner") ? cabinet.cabWidth2 : cabinet.cabDepth}</td> {/*Condition for displaying second width of corner cabinets as depth */}
                                 <td>{cabinet.cabMaterial}</td>
+                                <td> <Button bsStyle="danger" onClick={() => this.props.removeCabinetCallback(cabinet.cabNum)}>DEL</Button> </td>
                             </tr>
                         )
                     })}

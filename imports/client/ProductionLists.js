@@ -64,6 +64,23 @@ class ProductionLists extends Component {
     }
   }
 
+  removeCabinetFromList = (cabinetNumber) => {
+    cabinets = this.state.cabinets
+    //Use filter method to filter out cabinet number that is getting removed
+    newCabList = cabinets.filter(function(cabinet) {
+      if (cabinet.cabNum != cabinetNumber) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    this.setState({
+        cabinets: newCabList,
+    });
+
+  }
+
   addCabinetToList = (cabinetData) => {
     if (cabinetData.type==="pantry") {
       console.log("Here")
@@ -113,7 +130,7 @@ class ProductionLists extends Component {
               <AddCutListCabinet doorStyles= {this.props.doorStyles} cabinets={this.props.cabinets} materials={this.props.materials} addCabinetCallback={this.addCabinetToList} drawers={this.props.drawers}/>
               {/*Display Added Cabinets List*/}
               <Table responsive hover>
-                <CabinetList cutListCabinets={this.state.cabinets} />
+                <CabinetList cutListCabinets={this.state.cabinets} removeCabinetCallback={this.removeCabinetFromList}/>
               </Table>
               {/*Generate Cutlist CSV */}
               <GenerateCutListCSV projectName={this.state.projectName} cutListCabinets={this.state.cabinets} materials={this.props.materials} />
