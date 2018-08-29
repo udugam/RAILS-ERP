@@ -40,6 +40,7 @@ if (Meteor.userId()) {
         pendingMillworkItemID:'',
         pendingMillworkItemQty:0,
         cost:0,
+        costBreakdown: {}
       };
       this.handleInputChange = this.handleInputChange.bind(this);
       this.addAccessory = this.addAccessory.bind(this);
@@ -72,8 +73,20 @@ if (Meteor.userId()) {
       const accessories = Number(this.pendingAccessoryCostEstimate())+Number(this.addedAccessoriesCostEstimate())
       const millworkItems = Number(this.pendingMillworkItemCostEstimate())+Number(this.addedMillworkItemsCostEstimate())
       const cost = (material+doors+paint+drawers+hardware+crown+production+accessories+millworkItems).toFixed(2)
+      const breakdown = {
+        material: material,
+        doors: doors,
+        paint: paint,
+        drawers: drawers,
+        hardware: hardware,
+        crown: crown,
+        production: production,
+        accessories: accessories,
+        millworkItems: millworkItems
+      }
       this.setState({
         cost: cost,
+        costBreakdown: breakdown
       }, () => this.props.callbackFromProject(this.state));
     }
 

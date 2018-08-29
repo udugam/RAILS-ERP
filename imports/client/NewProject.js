@@ -14,6 +14,7 @@ if (Meteor.userId()) {
   import Operations from '../api/Operations';
   import Accessories from '../api/Accessories';
   import MillworkItems from '../api/MillworkItems';
+  import DisplayCosts from '../client/pricing_components/DisplayCosts'
 
   class NewProject extends Component {
 
@@ -46,13 +47,10 @@ if (Meteor.userId()) {
       const projectRooms = this.state.projectRooms;
       projectRooms[index] = roomData;
 
-
       this.setState({
         projectRooms: projectRooms
       });
     }
-
-
 
     projectCostEstimate(){
       var cost = 0;
@@ -86,6 +84,7 @@ if (Meteor.userId()) {
           pendingMillworkItemID:'',
           pendingMillworkItemQty:0,
           cost:0,
+          costBreakdown: {}
         }
       this.setState(function() {
         return {
@@ -167,6 +166,9 @@ if (Meteor.userId()) {
       <div className='fixed'>
         <div>
           <h1>Project Cost: ${this.projectCostEstimate()} </h1>
+          {this.state.projectRooms.length!=0 && 
+          <DisplayCosts breakdown={this.state.projectRooms[0].costBreakdown}/>
+          }
         </div>
       </div>
 
