@@ -2,6 +2,7 @@ if (Meteor.userId()) {
   import React, {Component} from 'react';
   import { createContainer } from 'meteor/react-meteor-data';
   import {PageHeader, Tabs, Tab, Table, Panel, Button} from 'React-Bootstrap';
+  import mmToFeet from '../client/utilities/mmToFeet'
 
   import Quotes from '../api/Quotes';
   import Materials from '../api/Materials';
@@ -163,12 +164,11 @@ if (Meteor.userId()) {
         return 0;
       } else {
         const storedMaterial = Materials.findOne({name: this.state.constructionMaterial})
-          return  (( storedMaterial.sheetCost/(storedMaterial.sheetW*storedMaterial.sheetL) )
+          return  (( storedMaterial.sheetCost/(mmToFeet(storedMaterial.sheetW)*mmToFeet(storedMaterial.sheetL)) )
                   *( (38*(this.state.height) + 656 + (156)*Math.trunc((this.state.height-56)/15))/144 )
                   *( this.state.linFootage )).toFixed(2)
       }
     }
-
 
     doorCostEstimate() {
       if (this.state.doorStyle === '') {
