@@ -10,3 +10,7 @@ div.fixed {
 .page-body {
   padding-top: 50px;
 }
+
+#loginModalSpacer {
+  height: 200px;  
+}

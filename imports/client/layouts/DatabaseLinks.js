@@ -20,6 +20,17 @@ class DatabaseLinks extends Component {
                 <li><Link to='/cabinetDatabase'>Cabinets</Link></li>
                 <li><Link to='/configureOps'>Operation Settings</Link></li>
               </ul>
+    } else if (Roles.userIsInRole(Meteor.userId(), 'purchaser')) {
+      return <ul className="nav navbar-nav">
+                <li><Link to='/addMaterials'>Materials</Link></li>
+                <li><Link to='/addHardware'>Hardware</Link></li>
+                <li><Link to='/addDoorStyle'>Door Styles</Link></li>
+                <li><Link to='/addCrownMolding'>Crown Molding</Link></li>
+                <li><Link to='/addColor'>Colors</Link></li>
+                <li><Link to='/addDrawer'>Drawers</Link></li>
+                <li><Link to='/addAccessory'>Accessories</Link></li>
+                <li><Link to='/addMillworkItem'>Millwork Items</Link></li>
+            </ul>
     } else {
       return  <ul className="nav navbar-nav">
                 <div>Failed</div>

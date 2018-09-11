@@ -5,8 +5,13 @@
       "MONGO_URL" : "mongodb://dbuser:dbpassword@ds129043.mlab.com:29043/purekitchensdb"
     }
   },
-  "admin": [
+  "admins": [
     "ryan.udugam@gmail.com",
-    "paulo@purekitchensinc.com"
+    "paulo@purekitchensinc.com",
+    "ryan@purekitchensinc.com"
+  ],
+  "purchasers": [
+    "tracy@purekitchensinc.com",
+    "melissa.rizzo@purekitchensinc.com"
   ]
 }
