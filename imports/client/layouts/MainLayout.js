@@ -98,8 +98,8 @@ class MainLayout extends Component {
 export default createContainer(() => {
   if(Meteor.userId()){
     let usersSub = Meteor.subscribe('currentUser');
-  }
-
-  return {
+    return {
+      ready: usersSub.ready(),
+    }
   }
 }, MainLayout);
