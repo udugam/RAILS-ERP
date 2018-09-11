@@ -56,14 +56,22 @@ class MainLayout extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem><Link to='/newProject'>Create New Project</Link></NavItem>
-            <NavItem><Link to='/myQuotes'>My Quotes</Link></NavItem>
+            {Roles.userIsInRole(Meteor.userId(), 'salesAssociate') &&
+            <NavDropdown eventKey={2} title="Sales" id="basic-nav-dropdown">            
+              <NavItem><Link to='/newProject'>Create New Project</Link></NavItem>
+              <NavItem><Link to='/myQuotes'>My Quotes</Link></NavItem>
+            </NavDropdown>
+            }
+            {Roles.userIsInRole(Meteor.userId(), 'productionAssociate') &&
             <NavDropdown eventKey={2} title="Production" id="basic-nav-dropdown">
               <ProductionLinks></ProductionLinks>
             </NavDropdown>
+            }
+            {Roles.userIsInRole(Meteor.userId(), 'purchasingAssociate') &&
             <NavDropdown eventKey={3} title="Database" id="basic-nav-dropdown">
               <DatabaseLinks></DatabaseLinks>
             </NavDropdown>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

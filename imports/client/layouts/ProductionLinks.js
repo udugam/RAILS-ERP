@@ -7,16 +7,10 @@ import { createContainer } from 'meteor/react-meteor-data';
 class ProductionLinks extends Component {
 
   showLinks() {
-    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
       return <ul className="nav navbar-nav">
                 <li><Link to='/createProject'>Create New Project</Link></li>
                 <li><Link to='/viewProjects'>Projects</Link></li>
               </ul>
-    } else {
-      return  <ul className="nav navbar-nav">
-                <div>Failed</div>
-              </ul>
-    }
   }
 
 
