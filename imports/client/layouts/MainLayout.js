@@ -102,4 +102,5 @@ export default createContainer(() => {
       ready: usersSub.ready(),
     }
   }
+  return {} 
 }, MainLayout);

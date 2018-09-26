@@ -143,12 +143,12 @@ class NewDoorStyle extends Component {
             <tr>
               <th>DoorStyle</th>
               <th>Supplier</th>
-              <th>Setup Cost Per Door</th>
-              <th>Oak</th>
-              <th>Maple</th>
-              <th>Cherry</th>
-              <th>MDF</th>
-              <th>Slab</th>
+              <th>Setup Cost Per Door ($/sqft)</th>
+              <th>Oak ($/sqft)</th>
+              <th>Maple ($/sqft)</th>
+              <th>Cherry ($/sqft)</th>
+              <th>MDF ($/sqft)</th>
+              <th>Slab ($/sqft) </th>
             </tr>
             {this.props.doorStyles.map((storedDoorStyle) => {
                 return (

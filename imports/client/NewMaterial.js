@@ -99,6 +99,8 @@ class NewMaterial extends Component {
                       <option value='Mercury Wood Products'> Mercury Wood Products </option>
                       <option value='Robert Bury'> Robert Bury </option>
                       <option value='McFaddens'> McFaddens </option>
+                      <option value='MegaPlus'> Mega Plus </option>
+                      <option value='WestonPremiumWoods'> Weston Premium Woods </option>
                     </select>
                   </div>
                 </div>
@@ -117,9 +119,9 @@ class NewMaterial extends Component {
             <tr>
               <th>Material Name</th>
               <th>Core Type</th>
-              <th>Thickness</th>
-              <th>Sheet Size</th>
-              <th>Sheet Cost</th>
+              <th>Thickness (mm)</th>
+              <th>Sheet Size (mm x mm)</th>
+              <th>Sheet Cost ($)</th>
               <th>Supplier</th>
             </tr>
             {this.props.materials.map((storedMaterial) => {

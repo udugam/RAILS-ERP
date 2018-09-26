@@ -50,8 +50,7 @@ if (Meteor.isServer) {
     },
 
     updateRoom(roomNum, updatedRoom, quoteID) {
-       
-     if(roomNum===0) {
+     if(roomNum==0) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.0.roomNum" : updatedRoom.roomNum,
@@ -72,8 +71,10 @@ if (Meteor.isServer) {
           "projectRooms.0.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.0.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===1) {
+     } else if (roomNum==1) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.1.roomNum" : updatedRoom.roomNum,
@@ -94,8 +95,10 @@ if (Meteor.isServer) {
           "projectRooms.1.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.1.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===2) {
+     } else if (roomNum==2) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.2.roomNum" : updatedRoom.roomNum,
@@ -116,8 +119,10 @@ if (Meteor.isServer) {
           "projectRooms.2.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.2.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===3) {
+     } else if (roomNum==3) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.3.roomNum" : updatedRoom.roomNum,
@@ -138,8 +143,10 @@ if (Meteor.isServer) {
           "projectRooms.3.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.3.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===4) {
+     } else if (roomNum==4) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.4.roomNum" : updatedRoom.roomNum,
@@ -160,8 +167,10 @@ if (Meteor.isServer) {
           "projectRooms.4.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.4.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===5) {
+     } else if (roomNum==5) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.5.roomNum" : updatedRoom.roomNum,
@@ -182,8 +191,10 @@ if (Meteor.isServer) {
           "projectRooms.5.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.5.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===6) {
+     } else if (roomNum==6) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.6.roomNum" : updatedRoom.roomNum,
@@ -204,8 +215,10 @@ if (Meteor.isServer) {
           "projectRooms.6.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.6.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===7) {
+     } else if (roomNum==7) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.7.roomNum" : updatedRoom.roomNum,
@@ -226,8 +239,10 @@ if (Meteor.isServer) {
           "projectRooms.7.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.7.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===8) {
+     } else if (roomNum==8) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.8.roomNum" : updatedRoom.roomNum,
@@ -248,8 +263,10 @@ if (Meteor.isServer) {
           "projectRooms.8.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.8.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
-     } else if (roomNum===9) {
+     } else if (roomNum==9) {
       Quotes.update( {_id:quoteID}, {
         $set: { 
           "projectRooms.9.roomNum" : updatedRoom.roomNum,
@@ -270,6 +287,8 @@ if (Meteor.isServer) {
           "projectRooms.9.quoteMillworkItems" : updatedRoom.quoteMillworkItems,
           "projectRooms.9.cost": updatedRoom.cost,
          }
+      }, function(err,docs) {
+        if (err) throw err
       });
      } 
     }
